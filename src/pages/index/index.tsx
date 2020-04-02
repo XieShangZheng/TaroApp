@@ -1,8 +1,8 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-
+import { PostCard, PostForm } from '../../components';
 import { add, minus, asyncAdd } from '../../actions/counter'
 
 import './index.scss'
@@ -36,53 +36,89 @@ type PageState = {}
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
 
 interface Index {
-  props: IProps;
+  props: IProps
 }
 
 @connect(({ counter }) => ({
   counter
 }), (dispatch) => ({
-  add () {
+  add() {
     dispatch(add())
   },
-  dec () {
+  dec() {
     dispatch(minus())
   },
-  asyncAdd () {
+  asyncAdd() {
     dispatch(asyncAdd())
   }
 }))
 class Index extends Component {
-
-    /**
-   * 指定config的类型声明为: Taro.Config
-   *
-   * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
-   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
-   * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
-   */
-    config: Config = {
+  state = {
+    posts: [
+      {
+        title: '泰罗奥特曼',
+        content: '泰罗是奥特之父和奥特之母唯一的亲生儿子。',
+      },
+    ],
+    formTitle: '',
+    formContent: '',
+  }
+  /**
+ * 指定config的类型声明为: Taro.Config
+ *
+ * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
+ * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
+ * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
+ */
+  config: Config = {
     navigationBarTitleText: '首页'
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps)
   }
+  componentWillUnmount() { }
+  componentDidShow() { }
+  componentDidHide() { }
 
-  componentWillUnmount () { }
+  handleSubmit(e) {
+    e.preventDefault()
 
-  componentDidShow () { }
+    const { formTitle: title, formContent: content } = this.state
+    const newPosts = this.state.posts.concat({ title, content })
 
-  componentDidHide () { }
+    this.setState({
+      posts: newPosts,
+      formTitle: '',
+      formContent: '',
+    })
+  }
 
-  render () {
+  handleTitleInput(e) {
+    this.setState({
+      formTitle: e.target.value,
+    })
+  }
+
+  handleContentInput(e) {
+    this.setState({
+      formContent: e.target.value,
+    })
+  }
+
+  render() {
     return (
       <View className='index'>
-        <Button className='add_btn' onClick={this.props.add}>+</Button>
-        <Button className='dec_btn' onClick={this.props.dec}>-</Button>
-        <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
-        <View><Text>{this.props.counter.num}</Text></View>
-        <View><Text>Hello, World</Text></View>
+        {this.state.posts.map((post, index) => (
+          <PostCard key={index} title={post.title} content={post.content} />
+        ))}
+        <PostForm
+          formTitle={this.state.formTitle}
+          formContent={this.state.formContent}
+          handleSubmit={e => this.handleSubmit(e)}
+          handleTitleInput={e => this.handleTitleInput(e)}
+          handleContentInput={e => this.handleContentInput(e)}
+        />
       </View>
     )
   }
