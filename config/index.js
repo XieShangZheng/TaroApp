@@ -94,5 +94,6 @@ module.exports = function (merge) {
   if (process.env.NODE_ENV === 'development') {
     return merge({}, config, require('./dev'))
   }
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   return merge({}, config, require('./prod'))
 }
