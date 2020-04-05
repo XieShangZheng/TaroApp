@@ -34,9 +34,9 @@ export default function Index() {
   return (
     <View className='index'>
       <AtMessage />
-      {posts.map((post, index) => (
+      {posts.map(post => (
         <PostCard
-          key={index}
+          key={post.title}
           title={post.title}
           content={post.content}
           isList

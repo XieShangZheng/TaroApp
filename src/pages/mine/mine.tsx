@@ -1,22 +1,80 @@
-import Taro, { } from '@tarojs/taro'
-import { View, Image } from '@tarojs/components'
+import Taro, { useState, useEffect } from '@tarojs/taro'
+import { View } from '@tarojs/components'
 
+import { Header, Footer } from '../../components'
 import './mine.scss'
-import avatar from '../../images/avatar.png';
 
 export default function Mine() {
+  const [nickName, setNickName] = useState('')
+  const [avatar, setAvatar] = useState('')
+  const [isLogout, setIsLogout] = useState(false)
+
+  // 双取反来构造字符串对应的布尔值，用于标志此时是否用户已经登录
+  const isLogged = !!nickName
+
+  useEffect(() => {
+    async function getStorage() {
+      try {
+        const { data } = await Taro.getStorage({ key: 'userInfo' })
+
+        const { nickName: asNickName, avatar: asAvatar } = data
+        setAvatar(asAvatar)
+        setNickName(asNickName)
+      } catch (err) {
+        console.log('getStorage ERR: ', err)
+      }
+    }
+
+    getStorage()
+  }, [])
+  useEffect(() => {
+
+  }, [nickName])
+
+  async function setLoginInfo(asAvatar: string, asNickName: string) {
+    setAvatar(asAvatar)
+    setNickName(asNickName)
+    try {
+      await Taro.setStorage({
+        key: 'userInfo',
+        data: { asAvatar, asNickName },
+      })
+    } catch (err) {
+      console.log('setStorage ERR: ', err)
+    }
+  }
+
+  async function handleLogout() {
+    setIsLogout(true)
+
+    try {
+      await Taro.removeStorage({ key: 'userInfo' })
+
+      setAvatar('')
+      setNickName('')
+    } catch (err) {
+      console.log('removeStorage ERR: ', err)
+    }
+
+    setIsLogout(false)
+  }
+
   return (
-    <View className='mine' >
-      <View>
-        <Image src={avatar} className='mine-avatar' />
-        <View className='mine-nickName'>图雀酱</View>
-        <View className='mine-username'>tuture</View>
-      </View>
-      <View className='mine-footer'>From 图雀社区 with Love ❤</View>
+    <View className='mine'>
+      <Header
+        isLogged={isLogged}
+        userInfo={{ avatar, nickName }}
+        setLoginInfo={setLoginInfo}
+      />
+      <Footer
+        isLogged={isLogged}
+        isLogout={isLogout}
+        handleLogout={handleLogout}
+      />
     </View>
   )
 }
 
 Mine.config = {
-  navigationBarTitleText: '首页'
+  navigationBarTitleText: '我的',
 }
