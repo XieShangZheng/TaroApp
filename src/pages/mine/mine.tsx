@@ -1,5 +1,7 @@
 import Taro, { useState, useEffect } from '@tarojs/taro'
 import { View } from '@tarojs/components'
+import { useDispatch } from '@tarojs/redux'
+import { SET_LOGIN_OUT } from '../../constants'
 
 import { Header, Footer } from '../../components'
 import './mine.scss'
@@ -9,6 +11,7 @@ export default function Mine() {
   const [avatar, setAvatar] = useState('')
   const [isLogout, setIsLogout] = useState(false)
 
+  const dispatch = useDispatch();
   // 双取反来构造字符串对应的布尔值，用于标志此时是否用户已经登录
   const isLogged = !!nickName
 
@@ -27,9 +30,6 @@ export default function Mine() {
 
     getStorage()
   }, [])
-  useEffect(() => {
-
-  }, [nickName])
 
   async function setLoginInfo(asAvatar: string, asNickName: string) {
     setAvatar(asAvatar)
@@ -50,8 +50,16 @@ export default function Mine() {
     try {
       await Taro.removeStorage({ key: 'userInfo' })
 
+
       setAvatar('')
       setNickName('')
+      dispatch({
+        type: SET_LOGIN_OUT,
+        payload: {
+          nickName: '',
+          avatar: '',
+        }
+      })
     } catch (err) {
       console.log('removeStorage ERR: ', err)
     }

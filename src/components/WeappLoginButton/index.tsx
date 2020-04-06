@@ -1,5 +1,7 @@
 import Taro, { useState } from '@tarojs/taro'
-import { Button } from '@tarojs/components'
+import { Button } from '@tarojs/components';
+import { useDispatch } from '@tarojs/redux';
+import { SET_LOGIN_INFO } from '../../constants';
 
 import './index.scss'
 
@@ -9,13 +11,20 @@ interface Props {
 
 export default function LoginButton(props: Props) {
   const [isLogin, setIsLogin] = useState(false)
-
+  const dispatch = useDispatch();
   async function onGetUserInfo(e) {
     setIsLogin(true)
 
     const { avatarUrl, nickName } = e.detail.userInfo
     await props.setLoginInfo(avatarUrl, nickName)
 
+    dispatch({
+      type: SET_LOGIN_INFO,
+      payload: {
+        avatar: avatarUrl,
+        nickName,
+      }
+    })
     setIsLogin(false)
   }
 
