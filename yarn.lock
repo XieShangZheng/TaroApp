@@ -210,7 +210,7 @@
     node-sass "^4.12.0"
     scss-bundle "^2.5.1"
 
-"@tarojs/redux-h5@2.1.0":
+"@tarojs/redux-h5@^2.1.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@tarojs/redux-h5/-/redux-h5-2.1.0.tgz#89e2d540f0c58a0e127126a66030b93157f4ba4b"
   integrity sha512-cRCXyDbnaZ2u7nBexS5782zLtbgKFuDickhfe6loaIbV4t6AatPZd2JduFIn2Q7ZEETP9V4r74fZ1x0UxMaz+w==
@@ -220,7 +220,7 @@
     loose-envify "^1.1.0"
     prop-types "^15.6.1"
 
-"@tarojs/redux@2.1.0":
+"@tarojs/redux@^2.1.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@tarojs/redux/-/redux-2.1.0.tgz#ea8a3a6882b759490584456b4b3f712061278d72"
   integrity sha512-kn22CEEbmMSTp2YdfzC+a0DsKTTTUMulkjK4OTwAhJo82PqnE6U+WBHBWD2czAbk7ORN4CP4zO3oV3noipcKSg==
@@ -7835,7 +7835,7 @@ redux-thunk@^2.3.0:
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
   integrity sha512-km6dclyFnmcvxhAcrQV2AkZmPQjzPDjgVlQtR0EQjxZPyJ0BnMf3in1ryuR8A2qU0HldVRfxYXbFSKlI3N7Slw==
 
-redux@^4.0.0:
+redux@^4.0.5:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.5.tgz#4db5de5816e17891de8a80c424232d06f051d93f"
   integrity sha512-VSz1uMAH24DM6MF72vcojpYPtrTUu3ByVWfPL1nPfVRb5mZVTve5GnNCUV53QM/BZ66xfWrm0CTWoM+Xlz8V1w==
