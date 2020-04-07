@@ -5,18 +5,13 @@ import { SET_LOGIN_INFO } from '../../constants';
 
 import './index.scss'
 
-interface Props {
-  setLoginInfo: (avatarUrl: string, nickName: string) => void
-}
-
-export default function LoginButton(props: Props) {
+export default function LoginButton(props) {
   const [isLogin, setIsLogin] = useState(false)
   const dispatch = useDispatch();
   async function onGetUserInfo(e) {
     setIsLogin(true)
 
     const { avatarUrl, nickName } = e.detail.userInfo
-    await props.setLoginInfo(avatarUrl, nickName)
 
     dispatch({
       type: SET_LOGIN_INFO,

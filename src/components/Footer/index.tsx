@@ -1,22 +1,28 @@
 import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
+import { useSelector } from '@tarojs/redux'
 
 import Logout from '../Logout'
 import './index.scss'
 
-interface Props {
-  handleLogout: () => void
-  isLogged: boolean
-  isLogout: boolean
+type State = {
+  user: {
+    nickName: string
+  }
 }
-export default function Footer(props: Props) {
+
+export default function Footer() {
+  const nickName = useSelector((state: State) => state.user.nickName)
+  // 双取反来构造字符串对应的布尔值，用于标志此时是否用户已经登录
+  const isLogged = !!nickName
+
   return (
     <View className='mine-footer'>
-      {props.isLogged && (
-        <Logout loading={props.isLogout} handleLogout={props.handleLogout} />
+      {isLogged && (
+        <Logout />
       )}
       <View className='tuture-motto'>
-        {props.isLogged ? 'From 图雀社区 with Love ❤' : '您还未登录'}
+        {isLogged ? 'From 图雀社区 with Love ❤' : '您还未登录'}
       </View>
     </View>
   )
