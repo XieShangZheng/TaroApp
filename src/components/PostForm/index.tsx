@@ -36,7 +36,7 @@ export default function PostForm() {
     dispatch({
       type: SET_POSTS,
       payload: {
-        post: {
+        posts: {
           title: formTitle,
           content: formContent,
           user: { nickName, avatar },
