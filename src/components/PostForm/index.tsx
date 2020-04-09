@@ -40,6 +40,7 @@ export default function PostForm() {
           title: formTitle,
           content: formContent,
           user: { nickName, avatar },
+          id: formTitle,
         },
       },
     })

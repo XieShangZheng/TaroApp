@@ -11,6 +11,7 @@ const INITIAL_STATE = {
 				nickName: '图雀酱',
 				avatar,
 			},
+			id: 'xxxxxxxxxxxx'
 		},
 	],
 	isOpened: false,

@@ -5,7 +5,7 @@ import { SET_LOGIN_INFO } from '../../constants';
 
 import './index.scss'
 
-export default function LoginButton(props) {
+export default function LoginButton() {
   const [isLogin, setIsLogin] = useState(false)
   const dispatch = useDispatch();
   async function onGetUserInfo(e) {
@@ -20,6 +20,15 @@ export default function LoginButton(props) {
         nickName,
       }
     })
+
+    try {
+      Taro.setStorage({
+        key: 'userInfo',
+        data: { avatar: avatarUrl, nickName }
+      })
+    } catch (err) {
+      console.log('setStorage ERR: ', err);
+    }
     setIsLogin(false)
   }
 
