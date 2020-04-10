@@ -1,6 +1,10 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunkMiddleware from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga'
+
 import rootReducer from '../reducers';
+import rootSaga from '../sagas'
+
+const sagaMiddleware = createSagaMiddleware();
 
 const composeEnhancers =
 	typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -11,7 +15,7 @@ const composeEnhancers =
 			)
 		: compose;
 
-const middlewares = [ thunkMiddleware ];
+const middlewares = [ sagaMiddleware ];
 
 if (process.env.NODE_ENV === 'development' && process.env.TARO_ENV !== 'quickapp') {
 	middlewares.push(require('redux-logger').createLogger());
@@ -24,5 +28,6 @@ const enhancer = composeEnhancers(
 
 export default function configStore() {
 	const store = createStore(rootReducer, enhancer);
+	sagaMiddleware.run(rootSaga)
 	return store;
 }
