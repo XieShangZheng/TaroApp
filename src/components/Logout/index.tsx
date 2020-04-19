@@ -19,6 +19,7 @@ export default function LogoutButton() {
         payload: {
           avatar: '',
           nickName: '',
+          userId: '',
         },
       })
     } catch (err) {

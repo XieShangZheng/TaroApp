@@ -38,11 +38,19 @@ export default function Index() {
         const { nickName: asNickName, avatar: asAvatar } = data;
         dispatch({ type: SET_LOGIN_INFO, payload: { nickName: asNickName, avatar: asAvatar } })
       } catch (err) {
-        console.log('getStorage ERR: ', err)
+        console.log('getStorage ERR-index: ', err)
       }
     }
     getStorage();
-  })
+  }, [dispatch])
+
+  useEffect(() => {
+    const WeAppEnv = Taro.getEnv() === Taro.ENV_TYPE.WEAPP
+
+    if (WeAppEnv) {
+      Taro.cloud.init({ env: 'prod-c0yn7' })
+    }
+  }, [])
 
   const setIsOpened = state => {
     dispatch({
