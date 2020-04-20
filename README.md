@@ -6,6 +6,12 @@
 4. TypeScript
 5. Eslint
 
+## 运行
+```bash
+# yarn 安装依赖
+# yarn dev:weapp 开发小程序
+```
+
 ## 功能
 - [x] 登录
 - [x] 退出登录
