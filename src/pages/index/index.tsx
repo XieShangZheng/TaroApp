@@ -2,7 +2,11 @@ import Taro, { useEffect } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import { useSelector, useDispatch } from '@tarojs/redux'
 import { AtFab, AtFloatLayout, AtMessage } from 'taro-ui'
-import { SET_POST_FORM_IS_OPENED, SET_LOGIN_INFO } from '../../constants'
+import {
+  SET_POST_FORM_IS_OPENED,
+  SET_LOGIN_INFO,
+  GET_POSTS,
+} from '../../constants'
 
 import { PostCard, PostForm } from '../../components'
 import './index.scss'
@@ -43,14 +47,6 @@ export default function Index() {
     }
     getStorage();
   }, [dispatch])
-
-  useEffect(() => {
-    const WeAppEnv = Taro.getEnv() === Taro.ENV_TYPE.WEAPP
-
-    if (WeAppEnv) {
-      Taro.cloud.init({ env: 'prod-c0yn7' })
-    }
-  }, [])
 
   const setIsOpened = state => {
     dispatch({

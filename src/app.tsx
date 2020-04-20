@@ -17,7 +17,13 @@ const store = configStore()
 
 class App extends Component {
 
-  componentDidMount() { }
+  componentDidMount() { 
+    const WeAppEnv = Taro.getEnv() === Taro.ENV_TYPE.WEAPP
+
+    if (WeAppEnv) {
+      Taro.cloud.init({ env: 'prod-c0yn7' })
+    }
+  }
 
   componentDidShow() { }
 
@@ -48,13 +54,13 @@ class App extends Component {
       list: [
         {
           pagePath: 'pages/index/index',
-          text: '首页', 
+          text: '首页',
           iconPath: './images/home.png',
           selectedIconPath: './images/homeSelected.png',
         },
         {
           pagePath: 'pages/mine/mine',
-          text: '我的', 
+          text: '我的',
           iconPath: './images/mine.png',
           selectedIconPath: './images/mineSelected.png',
         }

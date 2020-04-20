@@ -1,3 +1,4 @@
 import userApi from './user';
-// eslint-disable-next-line import/prefer-default-export
-export { userApi };
+import postApi from './post';
+
+export { userApi, postApi };

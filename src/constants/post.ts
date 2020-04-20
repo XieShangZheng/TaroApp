@@ -1,2 +1,5 @@
+export const CREATE_POST = 'CREATE_POST'
+export const POST_SUCCESS = 'POST_SUCCESS'
+export const POST_ERROR = 'POST_ERROR'
 export const SET_POSTS = 'SET_POSTS'
 export const SET_POST_FORM_IS_OPENED = 'SET_POST_FORM_IS_OPENED'
