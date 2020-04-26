@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import createSagaMiddleware from 'redux-saga'
+import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from '../reducers';
-import rootSaga from '../sagas'
+import rootSaga from '../sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -18,7 +18,17 @@ const composeEnhancers =
 const middlewares = [ sagaMiddleware ];
 
 if (process.env.NODE_ENV === 'development' && process.env.TARO_ENV !== 'quickapp') {
-	middlewares.push(require('redux-logger').createLogger());
+	middlewares.push(
+		require('redux-logger').createLogger({
+			logger: console,
+			timestamp: true,
+			diff: true,
+			duration: true,
+			logErrors: true,
+			predicate: true,
+			collapsed: true,
+		}),
+	);
 }
 
 const enhancer = composeEnhancers(
@@ -28,6 +38,6 @@ const enhancer = composeEnhancers(
 
 export default function configStore() {
 	const store = createStore(rootReducer, enhancer);
-	sagaMiddleware.run(rootSaga)
+	sagaMiddleware.run(rootSaga);
 	return store;
 }
