@@ -39,14 +39,30 @@ export default function Index() {
     async function getStorage() {
       try {
         const { data } = await Taro.getStorage({ key: 'userInfo' })
-        const { nickName: asNickName, avatar: asAvatar } = data;
-        dispatch({ type: SET_LOGIN_INFO, payload: { nickName: asNickName, avatar: asAvatar } })
+        console.log('%cAT-data: ', 'color: #bf2c9f; background: pink; font-size: 13px;', data);
+        dispatch({ type: SET_LOGIN_INFO, payload: { ...data, userId: data._id } })
       } catch (err) {
         console.log('getStorage ERR-index: ', err)
       }
     }
-    getStorage();
-  }, [dispatch])
+    if (!isLogged) {
+      getStorage();
+    }
+    async function getPosts() {
+      try {
+        // 更新 Redux Store 数据
+        dispatch({
+          type: GET_POSTS,
+        })
+      } catch (err) {
+        console.log('getPosts ERR: ', err)
+      }
+    }
+
+    if (!posts.length) {
+      getPosts()
+    }
+  }, [])
 
   const setIsOpened = state => {
     dispatch({
@@ -65,16 +81,11 @@ export default function Index() {
       setIsOpened(true)
     }
   }
-
   return (
     <View className='index'>
       <AtMessage />
-      {posts.map(post => (
-        <PostCard
-          key={post.title}
-          post={post}
-          isList
-        />
+      {posts.map((post: any) => (
+        <PostCard key={post._id} postId={post._id} post={post} isList />
       ))}
       <AtFloatLayout
         isOpened={isOpened}

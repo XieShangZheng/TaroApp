@@ -6,6 +6,7 @@ import { AtAvatar } from 'taro-ui';
 import './index.scss';
 
 interface Props {
+	postId: string
 	post: {
 		title: string
 		content: string
@@ -13,19 +14,19 @@ interface Props {
 			avatar: string
 			nickName: string
 		}
-		id: string
 	}
 	isList: boolean
 }
 
 export default function PostCard(props: Props) {
-	const { title = '', content = '', user, id } = props.post;
+	const { title = '', content = '', user } = props.post;
 	const { avatar, nickName } = user || {};
 
 	const handleClick = () => {
+		const postId = props.postId;
 		if (props.isList) {
 			Taro.navigateTo({
-				url: `/pages/post/post?postId=${id}`,
+				url: `/pages/post/post?postId=${postId}`,
 			})
 		}
 	}

@@ -24,7 +24,6 @@ export default function Mine() {
         const { data } = await Taro.getStorage({ key: 'userInfo' })
 
         const { nickName: asNickName, avatar, _id } = data
-
         // 更新 Redux Store 数据
         dispatch({
           type: SET_LOGIN_INFO,

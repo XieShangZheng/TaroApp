@@ -12,7 +12,7 @@ async function login(userInfo) {
 					userInfo,
 				},
 			});
-			return result.event.userInfo;
+			return result.user;
 		}
 	} catch (err) {
 		console.error('login ERR: ', err);

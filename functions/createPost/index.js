@@ -1,8 +1,6 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-console.log('%cAT-cloud: ', 'color: #bf2c9f; background: pink; font-size: 13px;', cloud);
-
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV,
 })
@@ -11,6 +9,7 @@ const db = cloud.database()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
+  console.log('%cAT-event: ', 'color: #bf2c9f; background: pink; font-size: 13px;', event);
   const { postData, userId } = event
 
   console.log('event', event)

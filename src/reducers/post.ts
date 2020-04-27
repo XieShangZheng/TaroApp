@@ -6,6 +6,7 @@ import {
 	CREATE_POST,
 	POST_NORMAL,
 	POST_SUCCESS,
+	GET_POSTS,
 } from '../constants/';
 
 const INITIAL_STATE = {
@@ -43,6 +44,10 @@ export default function post(state = INITIAL_STATE, action) {
 
 		case POST_ERROR: {
 			return { ...state, postStatus: POST_ERROR, isPost: false };
+		}
+
+		case GET_POSTS: {
+			return { ...state, postStatus: GET_POSTS };
 		}
 
 		default:
