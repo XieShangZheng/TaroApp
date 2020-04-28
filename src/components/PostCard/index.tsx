@@ -6,20 +6,21 @@ import { AtAvatar } from 'taro-ui';
 import './index.scss';
 
 interface Props {
-	postId: string
+	postId?: string
 	post: {
-		title: string
-		content: string
-		user: {
+		title?: string
+		content?: string
+		user?: {
 			avatar: string
 			nickName: string
 		}
 	}
-	isList: boolean
+	isList?: boolean
 }
 
 export default function PostCard(props: Props) {
 	const { title = '', content = '', user } = props.post;
+	// console.log('%cAT-title-/Users/at/code/company/TaroApp/src/components/PostCard/index.tsx: ', 'color: #bf2c9f; background: pink; font-size: 13px;', title);
 	const { avatar, nickName } = user || {};
 
 	const handleClick = () => {
