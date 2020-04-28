@@ -11,6 +11,7 @@ import {
 	SET_POST_FORM_IS_OPENED,
 	GET_POSTS,
 	GET_POST,
+	SET_POST,
 } from '../constants';
 
 function* createPost(postData, userId) {
@@ -113,7 +114,7 @@ function* getPost(postId) {
 			},
 		});
 	} catch (err) {
-		console.log('getPost ERR: ', err);
+		console.log('getPost ERR-saga: ', err);
 
 		// 获取帖子失败，发起失败的 action
 		yield put({ type: POST_ERROR });
