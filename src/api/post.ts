@@ -40,7 +40,7 @@ async function getPosts() {
 			return result.posts;
 		}
 	} catch (err) {
-		console.error('getPosts ERR: ', err);
+		console.error('getPosts ERR-api: ', err);
 	}
 }
 
@@ -60,7 +60,7 @@ async function getPost(postId) {
 			return result.post;
 		}
 	} catch (err) {
-		console.error('getPost ERR: ', err);
+		console.error('getPost ERR-api: ', err);
 	}
 }
 
