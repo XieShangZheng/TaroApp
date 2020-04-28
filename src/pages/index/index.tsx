@@ -39,7 +39,6 @@ export default function Index() {
     async function getStorage() {
       try {
         const { data } = await Taro.getStorage({ key: 'userInfo' })
-        console.log('%cAT-data: ', 'color: #bf2c9f; background: pink; font-size: 13px;', data);
         dispatch({ type: SET_LOGIN_INFO, payload: { ...data, userId: data._id } })
       } catch (err) {
         console.log('getStorage ERR-index: ', err)
