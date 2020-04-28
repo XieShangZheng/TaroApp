@@ -1,5 +1,5 @@
 {
-  "name": "getPost",
+  "name": "getPosts",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
