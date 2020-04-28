@@ -22,7 +22,7 @@ export default function Footer() {
         <Logout />
       )}
       <View className='tuture-motto'>
-        {isLogged ? 'From 图雀社区 with Love ❤' : '您还未登录'}
+        {isLogged ? 'From AT with Love ❤' : '您还未登录'}
       </View>
     </View>
   )
