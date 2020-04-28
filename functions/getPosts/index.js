@@ -10,6 +10,7 @@ const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
   const { postId } = event
+  console.log('%cAT-postId: ', 'color: #bf2c9f; background: pink; font-size: 13px;', postId);
 
   try {
     const { data } = await db

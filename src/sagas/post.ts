@@ -66,6 +66,7 @@ function* watchCreatePost() {
 function* getPosts() {
 	try {
 		const posts = yield call(postApi.getPosts);
+		console.log('%cAT-posts: ', 'color: #bf2c9f; background: pink; font-size: 13px;', posts);
 
 		// 其实以下三步可以合成一步，但是这里为了讲解清晰，将它们拆分成独立的单元
 
