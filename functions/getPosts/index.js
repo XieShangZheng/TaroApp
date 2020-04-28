@@ -6,22 +6,17 @@ cloud.init({
 })
 
 const db = cloud.database()
+const _ = db.command
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const { postId } = event
-  console.log('%cAT-postId: ', 'color: #bf2c9f; background: pink; font-size: 13px;', postId);
-
   try {
-    const { data } = await db
-      .collection('post')
-      .doc(postId)
-      .get()
+    const { data } = await db.collection('post').get()
 
     return {
-      post: data,
+      posts: data,
     }
   } catch (e) {
-    console.error(`getPost ERR: ${e}`)
+    console.error(`getPosts ERR: ${e}`)
   }
 }
