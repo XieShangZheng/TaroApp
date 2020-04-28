@@ -6,3 +6,4 @@ export const SET_POST_FORM_IS_OPENED = 'SET_POST_FORM_IS_OPENED'; // 更新发�
 export const GET_POSTS = 'GET_POSTS'; // 获取帖子列表
 export const GET_POST = 'GET_POST'; // 获取帖子
 export const SET_POST = 'SET_POST'; // 更新帖子
+export const POST_NORMAL = 'POST_NORMAL';
