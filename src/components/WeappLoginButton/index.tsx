@@ -1,19 +1,21 @@
-import Taro, { useState } from '@tarojs/taro'
-import { useDispatch } from '@tarojs/redux'
+import Taro from '@tarojs/taro'
+import { useDispatch, useSelector } from '@tarojs/redux'
 import { AtButton } from 'taro-ui'
 
 import './index.scss'
 import { LOGIN } from '../../constants'
 
-export default function WeappLoginButton() {
-  const [isLogin, setIsLogin] = useState(false)
+interface State {
+  user: {
+    isLogin: boolean
+  }
+}
 
+export default function WeappLoginButton() {
+  const isLogin = useSelector((state: State) => state.user.isLogin)
   const dispatch = useDispatch()
 
   async function onGetUserInfo(e) {
-    setTimeout(() => {
-      setIsLogin(true)
-    }, 0);
 
     const { avatarUrl, nickName } = e.detail.userInfo
     const userInfo = { avatar: avatarUrl, nickName }
@@ -21,11 +23,10 @@ export default function WeappLoginButton() {
     dispatch({
       type: LOGIN,
       payload: {
-        userInfo: userInfo,
+        userInfo,
       },
     })
 
-    setIsLogin(false)
   }
 
   return (
