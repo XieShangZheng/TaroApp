@@ -53,12 +53,15 @@ export default function Index() {
         dispatch({
           type: GET_POSTS,
         })
+        Taro.hideLoading();
       } catch (err) {
+        Taro.hideLoading();
         console.log('getPosts ERR: ', err)
       }
     }
 
-    if (!posts.length) {
+    if (posts && !posts.length) {
+      Taro.showLoading({ title: '加载中' });
       getPosts()
     }
   }, [])
