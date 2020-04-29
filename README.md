@@ -20,8 +20,8 @@
 - [x] 文章列表
 - [x] 文章详情
 - [x] 按钮登录 loading
-- [ ] 文章列表 loading
-- [ ] 文章详情 loading
+- [x] 文章列表 loading
+- [x] 文章详情 loading
 - [ ] 错误监控
 - [ ] api 封装
 - [ ] api 调用控制台日志打印
