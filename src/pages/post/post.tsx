@@ -20,17 +20,19 @@ export default function Post() {
   const post = useSelector((state: State) => state.post.post)
 
   useEffect(() => {
+    Taro.showLoading({ title: '加载中' });
     dispatch({
       type: GET_POST,
       payload: {
         postId,
       },
     })
+    Taro.hideLoading();
 
     return () => {
       dispatch({ type: SET_POST, payload: { post: {} } })
     }
-  }, [])
+  }, [dispatch, postId])
 
   return (
     <View className='post'>
