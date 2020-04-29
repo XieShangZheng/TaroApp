@@ -1,6 +1,6 @@
 import Taro, { useState } from '@tarojs/taro'
-import { Button } from '@tarojs/components'
 import { useDispatch } from '@tarojs/redux'
+import { AtButton } from 'taro-ui'
 
 import './index.scss'
 import { LOGIN } from '../../constants'
@@ -27,7 +27,7 @@ export default function WeappLoginButton() {
   }
 
   return (
-    <Button
+    <AtButton
       openType='getUserInfo'
       onGetUserInfo={onGetUserInfo}
       type='primary'
@@ -35,6 +35,6 @@ export default function WeappLoginButton() {
       loading={isLogin}
     >
       微信登录
-    </Button>
+    </AtButton>
   )
 }
