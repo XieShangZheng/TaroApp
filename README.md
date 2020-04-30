@@ -5,6 +5,7 @@
 * Redux
 * Redux-saga
 * TypeScript
+* sass
 * Eslint
 
 ## 运行
@@ -13,7 +14,7 @@
 # yarn dev:weapp 启动小程序
 ```
 
-## 功能
+## 待办
 - [x] 登录
 - [x] 退出登录
 - [x] 发布文章
@@ -24,6 +25,7 @@
 - [x] 文章详情 loading
 - [ ] 角色权限
 - [ ] 删除文章
+- [ ] commit 提交规范
 - [ ] 错误监控
 - [ ] api 封装
 - [ ] api 调用控制台日志打印
@@ -54,26 +56,26 @@
 │   ├── dev.js                    开发时配置
 │   ├── index.js                  默认配置
 │   └── prod.js                   打包时配置
-├── dist                          打包后的文件
+├── dist                          打包后文件
 ├── functions                     云开发函数
-├── src                           开发目录
-│   ├── app.scss                  入口 scss
-│   ├── app.tsx                   入口 app
-│   ├── index.html                模板文件
-│   ├── api                       接口
+├── src                           代码文件夹
+│   ├── api                       api 定义
 │   ├── asset                     静态资源
-│   │   └── theme                 主题
-│   ├── components                组件
+│   │   └── theme                 主题样式
+│   ├── components                业务组件
 │   ├── images                    图片资源
 │   ├── pages                     页面
-│   ├── constants                 常量
-│   ├── actions					
+│   ├── constants                 常量定义
+│   ├── store                     状态管理
+│   ├── actions
 │   ├── reducers
 │   ├── sagas
-│   └── store                     redux store
-├── package.json
+│   ├── app.scss
+│   ├── app.tsx
+│   └── index.html
 ├── project.config.json           小程序配置文件
 ├── global.d.ts                   全局 ts 定义文件
 ├── tsconfig.json                 ts 配置文件
+├── package.json
 └── README.md
 ```
