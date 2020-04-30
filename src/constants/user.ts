@@ -1,4 +1,3 @@
-export const SET_IS_OPENED = 'MODIFY_IS_OPENED' // 设置登录框开启/关闭信息
 export const SET_LOGIN_INFO = 'SET_LOGIN_INFO' // 设置登录信息
 export const SET_LOGIN_OUT = 'SET_LOGIN_OUT' // 设置退出登录
 
