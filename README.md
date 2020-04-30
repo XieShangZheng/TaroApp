@@ -72,7 +72,7 @@
 │   ├── actions															
 │   ├── reducers
 │   ├── sagas
-│   └── store                                redux store
+│   └── store                               redux store
 ├── package.json
 ├── project.config.json											小程序配置文件
 ├── global.d.ts															全局 ts 定义文件
