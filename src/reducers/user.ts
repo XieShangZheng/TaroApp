@@ -1,4 +1,11 @@
-import { SET_LOGIN_INFO, SET_IS_OPENED, LOGIN_SUCCESS, LOGIN, LOGIN_ERROR, LOGIN_NORMAL } from '../constants/';
+import {
+	SET_LOGIN_INFO,
+	LOGIN_SUCCESS,
+	LOGIN,
+	LOGIN_ERROR,
+	LOGIN_NORMAL,
+	SET_LOGIN_OUT,
+} from '../constants/';
 
 const INITIAL_STATE = {
 	userId: '',
@@ -11,16 +18,19 @@ const INITIAL_STATE = {
 
 export default function user(state = INITIAL_STATE, action) {
 	switch (action.type) {
-		case SET_IS_OPENED: {
-			const { isOpened } = action.payload;
-
-			return { ...state, isOpened };
+		case SET_LOGIN_INFO: {
+			return { ...state, ...action.payload };
 		}
 
-		case SET_LOGIN_INFO: {
-			const { avatar, nickName, userId } = action.payload;
-
-			return { ...state, nickName, avatar, userId };
+		case SET_LOGIN_OUT: {
+			return {
+				...state,
+				avatar: '',
+				nickName: '',
+				userId: '',
+				loginStatus: LOGIN_NORMAL,
+				isLogin: false,
+			};
 		}
 
 		case LOGIN: {
