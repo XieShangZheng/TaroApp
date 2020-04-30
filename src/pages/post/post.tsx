@@ -27,12 +27,16 @@ export default function Post() {
   }, [isPost])
 
   useEffect(() => {
-    dispatch({
-      type: GET_POST,
-      payload: {
-        postId,
-      },
-    })
+    try {
+      dispatch({
+        type: GET_POST,
+        payload: {
+          postId,
+        },
+      })
+    } catch (err) {
+      console.log('getPost ERR-pages-post: ', err)
+    }
 
     return () => {
       dispatch({ type: SET_POST, payload: { post: {} } })
