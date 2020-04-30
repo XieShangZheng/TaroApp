@@ -29,7 +29,7 @@
 ## 云函数本地调试
 在小程序开发者工具中选择云函数指定函数，右键点击“开启云函数本地调试”，随后出现新的窗口，选择开启本地调试且模拟部分“从小程序端调用”即可。
 
-## 报错
+## 项目中遇到的报错信息
 ### 请先调用 init 完成初始化后再调用其他云 API
 1. 尝试清空小程序开发者工具中的缓存试试（可能是开发者工具的bug~）
 2. 检查项目是否运行中 `yarn dev:weapp`
@@ -43,4 +43,39 @@
 3. 定义 sagas 需要的常量文件
 4. 定义 sagas 涉及到的前端 API 文件
 5. 创建对于的微信小程序云函数，并编写对应的 Node.js 处理逻辑
-6. 定义对应的 reducers 文
+6. 定义对应的 reducers 文件
+
+## 目录
+```
+.
+├── config                           				配置目录
+│   ├── dev.js                              开发时配置
+│   ├── index.js														默认配置
+│   └── prod.js															打包时配置
+├── dist																		打包后的文件
+├── functions																云开发函数
+│   ├── createPost													创建文章
+│   ├── getPost															获取单个文章
+│   ├── getPosts														获取文章列表
+│   └── login																登录
+├── src																			开发目录
+│   ├── api																	接口
+│   ├── app.scss														入口 scss
+│   ├── app.tsx															入口 app
+│   ├── asset																静态资源
+│   │   └── theme														主题
+│   ├── components													组件
+│   ├── images															图片资源
+│   ├── index.html													入口
+│   ├── pages																页面
+│   ├── constants														常量
+│   ├── actions															
+│   ├── reducers
+│   ├── sagas
+│   └── store                                redux store
+├── package.json
+├── project.config.json											小程序配置文件
+├── global.d.ts															全局 ts 定义文件
+├── tsconfig.json                           ts 配置文件
+└── README.md
+```
