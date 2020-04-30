@@ -2,7 +2,7 @@ import Taro, { useState } from '@tarojs/taro'
 import { AtButton } from 'taro-ui'
 import { useDispatch } from '@tarojs/redux'
 
-import { SET_LOGIN_INFO } from '../../constants'
+import {  SET_LOGIN_OUT } from '../../constants'
 
 export default function LogoutButton() {
   const [isLogout, setIsLogout] = useState(false)
@@ -15,12 +15,7 @@ export default function LogoutButton() {
       await Taro.removeStorage({ key: 'userInfo' })
 
       dispatch({
-        type: SET_LOGIN_INFO,
-        payload: {
-          avatar: '',
-          nickName: '',
-          userId: '',
-        },
+        type: SET_LOGIN_OUT,
       })
     } catch (err) {
       console.log('removeStorage ERR: ', err)
