@@ -7,6 +7,7 @@ import {
 	POST_NORMAL,
 	POST_SUCCESS,
 	GET_POSTS,
+	GET_POST,
 } from '../constants/';
 
 const INITIAL_STATE = {
@@ -21,7 +22,7 @@ export default function post(state = INITIAL_STATE, action) {
 	switch (action.type) {
 		case SET_POST: {
 			const { post: asPost } = action.payload;
-			return { ...state, post: asPost };
+			return { ...state, post: asPost, isPost: false };
 		}
 
 		case SET_POSTS: {
@@ -47,7 +48,11 @@ export default function post(state = INITIAL_STATE, action) {
 		}
 
 		case GET_POSTS: {
-			return { ...state, postStatus: GET_POSTS };
+			return { ...state, postStatus: GET_POSTS, isPost: true };
+		}
+
+		case GET_POST: {
+			return { ...state, postStatus: GET_POST, isPost: true };
 		}
 
 		default:

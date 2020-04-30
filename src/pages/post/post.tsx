@@ -9,6 +9,7 @@ import './post.scss'
 type State = {
   post: {
     post: {}
+    isPost: boolean
   }
 }
 
@@ -18,16 +19,20 @@ export default function Post() {
 
   const dispatch = useDispatch()
   const post = useSelector((state: State) => state.post.post)
+  const isPost = useSelector((state: State) => state.post.isPost)
 
   useEffect(() => {
-    Taro.showLoading({ title: '加载中' });
+    isPost && Taro.showLoading({ title: '加载中' })
+    !isPost && Taro.hideLoading();
+  }, [isPost])
+
+  useEffect(() => {
     dispatch({
       type: GET_POST,
       payload: {
         postId,
       },
     })
-    Taro.hideLoading();
 
     return () => {
       dispatch({ type: SET_POST, payload: { post: {} } })
