@@ -11,7 +11,8 @@ const _ = db.command
 // 云函数入口函数
 exports.main = async (event, context) => {
   try {
-    const { data } = await db.collection('post').get()
+    // 根据更新时间倒序获取文章列表
+    const { data } = await db.collection('post').orderBy('updatedAt', 'desc').get()
 
     return {
       posts: data,
