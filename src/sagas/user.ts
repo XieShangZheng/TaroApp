@@ -6,7 +6,7 @@ import { call, put, take, fork } from 'redux-saga/effects';
 // fork：在 saga 函数中无阻塞的调用 handlerSaga，即调用之后，不会阻塞后续的执行逻辑。
 
 import { userApi } from '../api';
-import { SET_LOGIN_INFO, LOGIN_SUCCESS, LOGIN, LOGIN_ERROR, SET_IS_OPENED } from '../constants';
+import { SET_LOGIN_INFO, LOGIN_SUCCESS, LOGIN, LOGIN_ERROR } from '../constants';
 
 /***************************** 登录逻辑开始 ************************************/
 
@@ -21,9 +21,6 @@ function* login(userInfo) {
 
 		// 发起登录成功的 action
 		yield put({ type: LOGIN_SUCCESS });
-
-		// 关闭登录框弹出层
-		yield put({ type: SET_IS_OPENED, payload: { isOpened: false } });
 
 		// 更新 Redux store 数据
 		const { nickName, avatar, _id } = user;
