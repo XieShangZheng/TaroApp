@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from '@tarojs/redux'
 
 import { Header, Footer } from '../../components'
 import './mine.scss'
-import { SET_LOGIN_INFO } from '../../constants'
+import { SET_LOGIN_INFO, LOGIN_SUCCESS } from '../../constants'
 
 interface State {
   user: {
@@ -27,7 +27,12 @@ export default function Mine() {
         // 更新 Redux Store 数据
         dispatch({
           type: SET_LOGIN_INFO,
-          payload: { nickName: asNickName, avatar, userId: _id },
+          payload: {
+            nickName: asNickName,
+            avatar, 
+            userId: _id,
+            loginStatus: LOGIN_SUCCESS,
+          },
         })
       } catch (err) {
         console.log('getStorage ERR-mine: ', err)
@@ -37,7 +42,7 @@ export default function Mine() {
     if (!isLogged) {
       getStorage()
     }
-  },[dispatch, isLogged])
+  }, [dispatch, isLogged])
 
   return (
     <View className='mine'>
