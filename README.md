@@ -50,32 +50,28 @@
 .
 ├── config                        配置目录
 │   ├── dev.js                    开发时配置
-│   ├── index.js									默认配置
-│   └── prod.js										打包时配置
-├── dist													打包后的文件
-├── functions											云开发函数
-│   ├── createPost								创建文章
-│   ├── getPost										获取单个文章
-│   ├── getPosts									获取文章列表
-│   └── login											登录
-├── src														开发目录
-│   ├── api												接口
-│   ├── app.scss								  入口 scss
-│   ├── app.tsx									  入口 app
-│   ├── asset									    静态资源
-│   │   └── theme									主题
-│   ├── components								组件
-│   ├── images										图片资源
-│   ├── index.html								入口
-│   ├── pages											页面
-│   ├── constants									常量
-│   ├── actions															
+│   ├── index.js                  默认配置
+│   └── prod.js                   打包时配置
+├── dist                          打包后的文件
+├── functions                     云开发函数
+├── src                           开发目录
+│   ├── app.scss                  入口 scss
+│   ├── app.tsx                   入口 app
+│   ├── index.html                模板文件
+│   ├── api                       接口
+│   ├── asset                     静态资源
+│   │   └── theme                 主题
+│   ├── components                组件
+│   ├── images                    图片资源
+│   ├── pages                     页面
+│   ├── constants                 常量
+│   ├── actions					
 │   ├── reducers
 │   ├── sagas
 │   └── store                     redux store
 ├── package.json
-├── project.config.json						小程序配置文件
-├── global.d.ts										全局 ts 定义文件
+├── project.config.json           小程序配置文件
+├── global.d.ts                   全局 ts 定义文件
 ├── tsconfig.json                 ts 配置文件
 └── README.md
 ```
