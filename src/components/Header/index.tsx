@@ -4,20 +4,20 @@ import { AtMessage } from 'taro-ui'
 import { useSelector } from '@tarojs/redux'
 
 import LoggedMine from '../LoggedMine'
-import WeappLoginButton from '../WeappLoginButton'
+import WeAppLoginButton from '../WeAppLoginButton'
 import './index.scss'
 
 type State = {
   user: {
-    nickName: string
+    loginStatus: string
   }
 }
 
-export default function Header(props) {
+export default function Header() {
   const isWeapp = Taro.getEnv() === Taro.ENV_TYPE.WEAPP
 
-  const nickName = useSelector((state: State) => state.user.nickName)
-  const isLogged = !!nickName;
+  const loginStatus = useSelector((state: State) => state.user.loginStatus)
+  const isLogged = loginStatus === 'LOGIN_SUCCESS';
 
   return (
     <View className='user-box'>
@@ -25,7 +25,7 @@ export default function Header(props) {
       <LoggedMine />
       {!isLogged && (
         <View className='login-button-box'>
-          {isWeapp && <WeappLoginButton />}
+          {isWeapp && <WeAppLoginButton />}
         </View>
       )}
     </View>
