@@ -23,6 +23,7 @@ interface State {
       id: string
     }]
     isOpened: boolean
+    isPost: boolean
   }
   user: {
     nickName: string
@@ -32,8 +33,14 @@ export default function Index() {
   const isOpened = useSelector((state: State) => state.post.isOpened)
   const posts = useSelector((state: State) => state.post.posts) || []
   const nickName = useSelector((state: State) => state.user.nickName)
+  const isPost = useSelector((state: State) => state.post.isPost)
   const isLogged = !!nickName;
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    isPost && Taro.showLoading({ title: '加载中' })
+    !isPost && Taro.hideLoading();
+  }, [isPost])
 
   useEffect(() => {
     async function getStorage() {
@@ -53,15 +60,12 @@ export default function Index() {
         dispatch({
           type: GET_POSTS,
         })
-        Taro.hideLoading();
       } catch (err) {
-        Taro.hideLoading();
         console.log('getPosts ERR: ', err)
       }
     }
 
     if (posts && !posts.length) {
-      Taro.showLoading({ title: '加载中' });
       getPosts()
     }
   }, [])
