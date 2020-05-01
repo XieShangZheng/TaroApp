@@ -12,7 +12,7 @@ const _ = db.command
 exports.main = async (event, context) => {
   try {
     // 根据更新时间倒序获取文章列表
-    const { data } = await db.collection('post').orderBy('updatedAt', 'desc').get()
+    const { data } = await db.collection('post').orderBy('createdAt', 'desc').get();
 
     return {
       posts: data,
