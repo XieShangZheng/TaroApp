@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro';
 import { View } from '@tarojs/components';
 import classNames from 'classnames';
-import { AtAvatar } from 'taro-ui';
+import { ClAvatar } from 'mp-colorui';
 
 import './index.scss';
 
@@ -20,8 +20,8 @@ interface Props {
 
 export default function PostCard(props: Props) {
 	const { title = '', content = '', user } = props.post;
-	// console.log('%cAT-title-/Users/at/code/company/TaroApp/src/components/PostCard/index.tsx: ', 'color: #bf2c9f; background: pink; font-size: 13px;', title);
 	const { avatar, nickName } = user || {};
+	const headerArray = [{ url: avatar }]
 
 	const handleClick = () => {
 		const postId = props.postId;
@@ -39,7 +39,7 @@ export default function PostCard(props: Props) {
 			<View className='post-header'>
 				<View className='at-article__h1'>{title}</View>
 				<View className='profile-box'>
-					<AtAvatar circle size='small' image={avatar} />
+					<ClAvatar shape='round' size='normal' headerArray={headerArray} />
 					<View className='at-article__info post-nickName'>{nickName}</View>
 				</View>
 			</View>
