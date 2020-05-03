@@ -1,7 +1,8 @@
-import Taro, { useEffect } from '@tarojs/taro'
+import Taro, { useEffect, useState } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import { useSelector, useDispatch } from '@tarojs/redux'
-import { AtFab, AtFloatLayout, AtMessage } from 'taro-ui'
+import { AtFab, AtFloatLayout, } from 'taro-ui'
+import { ClMessage } from 'mp-colorui'
 import {
   SET_POST_FORM_IS_OPENED,
   SET_LOGIN_INFO,
@@ -30,6 +31,7 @@ interface State {
   }
 }
 export default function Index() {
+  const [showMessage, setShowMessage] = useState(false)
   const isOpened = useSelector((state: State) => state.post.isOpened)
   const posts = useSelector((state: State) => state.post.posts) || []
   const nickName = useSelector((state: State) => state.user.nickName)
@@ -79,17 +81,14 @@ export default function Index() {
 
   const handleClickEdit = () => {
     if (!isLogged) {
-      Taro.atMessage({
-        type: 'warning',
-        message: '您还未登录哦！',
-      })
+      setShowMessage(true);
     } else {
       setIsOpened(true)
     }
   }
   return (
     <View className='index'>
-      <AtMessage />
+      <ClMessage type='warn' show={showMessage} message='您还未登录哦！' onClose={() => setShowMessage(false)} />
       {posts.map((post: any) => (
         <PostCard key={post._id} postId={post._id} post={post} isList />
       ))}
