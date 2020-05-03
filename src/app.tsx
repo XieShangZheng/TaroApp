@@ -1,7 +1,6 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
 
-// import 'taro-ui/dist/style/index.scss' // 引入组件样式 - 方式一
 import Index from './pages/index'
 import configStore from './store'
 
