@@ -8,11 +8,42 @@
 * sass
 * Eslint
 
-## 运行
+## 使用
+### 运行
 ```bash
 # yarn 安装依赖
 # yarn dev:weapp 启动小程序
 ```
+
+### 代码提交规范
+#### 命令
+```shell
+git add .
+git cz
+```
+
+#### type
+```
+# 主要type
+feat:     增加新功能
+fix:      修复bug
+
+# 特殊type
+docs:     只改动了文档相关的内容
+style:    不影响代码含义的改动，例如去掉空格、改变缩进、增删分号
+build:    构造工具的或者外部依赖的改动，例如webpack，npm
+refactor: 代码重构时使用
+revert:   执行git revert打印的message
+
+# 不推荐使用type
+test:     添加测试或者修改现有测试
+perf:     提高性能的改动
+ci:       与CI（持续集成服务）有关的改动
+chore:    不修改src或者test的其余修改，例如构建过程或辅助工具的变动
+```
+#### 更多资料
+[Git commit message 规范](https://juejin.im/post/5d0b3f8c6fb9a07ec07fc5d0#comment)
+
 ### 云函数本地调试
 1. 在小程序开发者工具中选择云函数指定函数
 2. 右键点击“开启云函数本地调试”，随后出现新的窗口
@@ -40,7 +71,7 @@
 - [ ] 错误监控
 - [ ] api 封装
 - [ ] api 调用控制台日志打印
-- [ ] 引入 MP-ColorUI 组件库
+- [x] 引入 MP-ColorUI 组件库
 - [ ] 移除 taro-ui
 
 ### bug
