@@ -120,6 +120,9 @@ chore:    不修改src或者test的其余修改，例如构建过程或辅助工
 ### 权限说明
 - 管理员 0
 - 用户 1
+### taro-ui mp-color-ui proxy-ui
+代理 ui 需要考虑组件 props 传值的问题，还需要考虑 message 组件 left css 属性未设置宽度不够的问题。
+1. 在 mp-color-ui 源码中修改了 message css 样式，添加了一行 `left: 0;`
 
 ## 报错
 ### [ 请先调用 init 完成初始化后再调用其他云 API ]
