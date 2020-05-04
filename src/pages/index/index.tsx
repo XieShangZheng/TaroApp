@@ -17,24 +17,24 @@ interface State {
     posts: [{
       title: string
       content: string
-      user: {
-        nickName: string
-        avatar: string
-      }
       id: string
     }]
     isOpened: boolean
     isPost: boolean
   }
+}
+interface User {
   user: {
     nickName: string
+    authority: number
   }
 }
 export default function Index() {
   const [showMessage, setShowMessage] = useState(false)
   const isOpened = useSelector((state: State) => state.post.isOpened)
   const posts = useSelector((state: State) => state.post.posts) || []
-  const nickName = useSelector((state: State) => state.user.nickName)
+  const nickName = useSelector((state: User) => state.user.nickName)
+  const authority = useSelector((state: User) => state.user.authority)
   const isPost = useSelector((state: State) => state.post.isPost)
   const isLogged = !!nickName;
   const dispatch = useDispatch();
@@ -70,7 +70,7 @@ export default function Index() {
     if (posts && !posts.length) {
       getPosts()
     }
-  }, [])
+  }, [posts, isLogged, dispatch])
 
   const setIsOpened = state => {
     dispatch({
@@ -99,11 +99,14 @@ export default function Index() {
       >
         <PostForm />
       </AtFloatLayout>
-      <View className='post-button'>
-        <AtFab onClick={() => handleClickEdit()}>
-          <Text className='at-fab__icon at-icon at-icon-edit'></Text>
-        </AtFab>
-      </View>
+      {
+        authority === 0 &&
+        <View className='post-button'>
+          <AtFab onClick={() => handleClickEdit()}>
+            <Text className='at-fab__icon at-icon at-icon-edit'></Text>
+          </AtFab>
+        </View>
+      }
     </View>
   )
 }
