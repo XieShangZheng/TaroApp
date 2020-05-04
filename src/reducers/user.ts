@@ -30,6 +30,7 @@ export default function user(state = INITIAL_STATE, action) {
 				userId: '',
 				loginStatus: LOGIN_NORMAL,
 				isLogin: false,
+				authority: 1,
 			};
 		}
 
