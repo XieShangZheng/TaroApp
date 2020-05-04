@@ -23,10 +23,9 @@ function* login(userInfo) {
 		yield put({ type: LOGIN_SUCCESS });
 
 		// 更新 Redux store 数据
-		const { nickName, avatar, _id } = user;
 		yield put({
 			type: SET_LOGIN_INFO,
-			payload: { nickName, avatar, userId: _id },
+			payload: { ...user },
 		});
 
 		// 提示登录成功
