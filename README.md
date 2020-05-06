@@ -69,15 +69,20 @@ chore:    不修改src或者test的其余修改，例如构建过程或辅助工
 
 ### 其他
 - [x] 角色权限
-- [ ] commit 提交规范
+- [x] commit 提交规范
 - [ ] 错误监控
 - [ ] api 封装
 - [ ] api 调用控制台日志打印
 - [x] 引入 MP-ColorUI 组件库
 - [ ] 移除 taro-ui
+- [x] mp-colorUI 的 message 的样式视觉效果宽度没有 100%，在源码中 dist/weapp/components/message/index.scss 中为 .cu-cl-message 添加 left: 0; 样式。
 
-### bug
+### 优化
 - [ ] 我的页面登录状态 bug 修复（未登录状态下显示退出登录按钮）
+- [ ] 重新登录后，点击发布按钮无反应
+- [ ] 离开首页，将打开状态下的发布按钮改为关闭
+- [ ] 刷新页面后，首页出现重复数据。
+- [ ] 点击发布按钮，无 message 提示消息
 
 ## 最佳实践
 1. 将组件中的同步逻辑重构到异步逻辑
@@ -86,6 +91,15 @@ chore:    不修改src或者test的其余修改，例如构建过程或辅助工
 4. 定义 sagas 涉及到的前端 API 文件
 5. 创建对于的微信小程序云函数，并编写对应的 Node.js 处理逻辑
 6. 定义对应的 reducers 文件
+
+## 插件/库
+### git commit 工具
+1. 全局安装 commitizen
+> commitizen 是一个撰写合格 commit message 的工具，用于代替 git commit 指令。
+  `sudo npm install -g commitizen`
+2. 全局安装 cz-conventional-changelog
+> cz-conventional-changelog 适配器提供 conventional-changelog 标准（约定式提交标准）。
+  `sudo npm install -g cz-conventional-changelog`
 
 ## 目录
 ```
@@ -122,6 +136,7 @@ chore:    不修改src或者test的其余修改，例如构建过程或辅助工
 ### 权限说明
 - 管理员 0
 - 用户 1
+
 ### taro-ui mp-color-ui proxy-ui
 代理 ui 需要考虑组件 props 传值的问题，还需要考虑 message 组件 left css 属性未设置宽度不够的问题。
 1. 在 mp-color-ui 源码中修改了 message css 样式，添加了一行 `left: 0;`
