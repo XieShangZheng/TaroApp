@@ -8,15 +8,15 @@ import { SET_LOGIN_INFO, LOGIN_SUCCESS } from '../../constants'
 
 interface State {
   user: {
-    nickName: string
+    loginStatus: string
   }
 }
 
 export default function Mine() {
   const dispatch = useDispatch()
-  const nickName = useSelector((state: State) => state.user.nickName)
+  const loginStatus = useSelector((state: State) => state.user.loginStatus)
 
-  const isLogged = !!nickName
+  const isLogged = loginStatus === 'LOGIN_SUCCESS';
 
   useEffect(() => {
     async function getStorage() {
@@ -29,7 +29,7 @@ export default function Mine() {
           type: SET_LOGIN_INFO,
           payload: {
             nickName: asNickName,
-            avatar, 
+            avatar,
             userId: _id,
             loginStatus: LOGIN_SUCCESS,
           },
@@ -39,6 +39,7 @@ export default function Mine() {
       }
     }
 
+    console.log('%cAT-isLogged-useEffect(): ', 'color: #bf2c9f; background: pink; font-size: 13px;', isLogged);
     if (!isLogged) {
       getStorage()
     }

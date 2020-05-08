@@ -25,7 +25,7 @@ interface State {
 }
 interface User {
   user: {
-    nickName: string
+    loginStatus: string
     authority: number
   }
 }
@@ -33,10 +33,10 @@ export default function Index() {
   const [showMessage, setShowMessage] = useState(false)
   const isOpened = useSelector((state: State) => state.post.isOpened)
   const posts = useSelector((state: State) => state.post.posts) || []
-  const nickName = useSelector((state: User) => state.user.nickName)
+  const loginStatus = useSelector((state: User) => state.user.loginStatus)
   const authority = useSelector((state: User) => state.user.authority)
   const isPost = useSelector((state: State) => state.post.isPost)
-  const isLogged = !!nickName;
+  const isLogged = loginStatus === 'LOGIN_SUCCESS';
   const dispatch = useDispatch();
 
   useEffect(() => {
