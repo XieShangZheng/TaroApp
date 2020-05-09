@@ -21,16 +21,14 @@ export default function Mine() {
   useEffect(() => {
     async function getStorage() {
       try {
-        const { data } = await Taro.getStorage({ key: 'userInfo' })
+        const { data }: any = await Taro.getStorage({ key: 'userInfo' })
 
-        const { nickName: asNickName, avatar, _id } = data
         // 更新 Redux Store 数据
         dispatch({
           type: SET_LOGIN_INFO,
           payload: {
-            nickName: asNickName,
-            avatar,
-            userId: _id,
+            ...data,
+            userId: data._id,
             loginStatus: LOGIN_SUCCESS,
           },
         })
