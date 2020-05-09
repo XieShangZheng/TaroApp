@@ -1,5 +1,7 @@
 # TaroApp
+
 ## 技术栈
+
 * Taro
 * 小程序云开发
 * Redux
@@ -9,21 +11,26 @@
 * Eslint
 
 ## 使用
+
 ### 运行
-```bash
+
+``` bash
 # yarn 安装依赖
 # yarn dev:weapp 启动小程序
 ```
 
 ### 代码提交规范
+
 #### 命令
-```shell
+
+``` shell
 git add .
 git cz
 ```
 
 #### type
-```
+
+``` 
 # 主要type
 feat:     增加新功能
 fix:      修复bug
@@ -41,51 +48,62 @@ perf:     提高性能的改动
 ci:       与CI（持续集成服务）有关的改动
 chore:    不修改src或者test的其余修改，例如构建过程或辅助工具的变动
 ```
+
 #### 更多资料
+
 [Git commit message 规范](https://juejin.im/post/5d0b3f8c6fb9a07ec07fc5d0#comment)
 
 ### 云函数本地调试
+
 1. 在小程序开发者工具中选择云函数指定函数
 2. 右键点击“开启云函数本地调试”，随后出现新的窗口
 3. 选择开启本地调试且模拟部分“从小程序端调用”即可
 
 ## TODO
+
 ### 我的
-- [x] 登录
-- [x] 退出登录
-- [x] 按钮登录 loading
-- [ ] 用户列表
-- [ ] 用户权限管理(为用户设置权限)
+
+* [x] 登录
+* [x] 退出登录
+* [x] 按钮登录 loading
+* [ ] 用户列表
+* [ ] 用户权限管理(为用户设置权限)
 
 ### 首页
-- [x] 发布文章
-- [x] 文章列表
-- [x] 文章详情
-- [x] 文章列表 loading
-- [x] 文章详情 loading
-- [x] 文章列表倒叙(按创建时间倒序)
-- [ ] 删除文章(列表、详情)-仅管理员可操作
-- [ ] 发布文章权限（仅管理员显示发布文章按钮）
+
+* [x] 发布文章
+* [x] 文章列表
+* [x] 文章详情
+* [x] 文章列表 loading
+* [x] 文章详情 loading
+* [x] 文章列表倒叙(按创建时间倒序)
+* [ ] 删除文章(列表、详情)-仅管理员可操作
+* [ ] 发布文章权限（仅管理员显示发布文章按钮）
 
 ### 其他
-- [x] 角色权限
-- [x] commit 提交规范
-- [ ] 错误监控
-- [ ] api 封装
-- [ ] api 调用控制台日志打印
-- [x] 引入 MP-ColorUI 组件库
-- [ ] 移除 taro-ui
-- [x] mp-colorUI 的 message 的样式视觉效果宽度没有 100%，在源码中 dist/weapp/components/message/index.scss 中为 .cu-cl-message 添加 left: 0; 样式。
+
+* [x] 角色权限
+* [x] commit 提交规范
+* [ ] 错误监控
+* [ ] api 封装
+* [ ] api 调用控制台日志打印
+* [x] 引入 MP-ColorUI 组件库
+* [ ] 移除 taro-ui
+* [x] mp-colorUI 的 message 的样式视觉效果宽度没有 100%，在源码中 dist/weapp/components/message/index.scss 中为 .cu-cl-message 添加 left: 0; 样式。
 
 ### 优化
-- [x] 我的页面登录状态 bug 修复（未登录状态下显示退出登录按钮）
+
+* [x] 我的页面登录状态 bug 修复（未登录状态下显示退出登录按钮）
+
 修复登录状态
-- [ ] 重新登录后，点击发布按钮无反应
-- [ ] 离开首页，将打开状态下的发布按钮改为关闭
-- [ ] 刷新页面后，首页出现重复数据。
-- [ ] 点击发布按钮，无 message 提示消息
+
+* [ ] 重新登录后，点击发布按钮无反应
+* [ ] 离开首页，将打开状态下的发布按钮改为关闭
+* [ ] 刷新页面后，首页出现重复数据。
+* [ ] 点击发布按钮，无 message 提示消息
 
 ## 最佳实践
+
 1. 将组件中的同步逻辑重构到异步逻辑
 2. 声明和补充对应需要的异步 sagas 文件
 3. 定义 sagas 需要的常量文件
@@ -93,24 +111,25 @@ chore:    不修改src或者test的其余修改，例如构建过程或辅助工
 5. 创建对于的微信小程序云函数，并编写对应的 Node.js 处理逻辑
 6. 定义对应的 reducers 文件
 
-## 插件/库
 ### git commit 工具
-1. 全局安装 commitizen
-  > commitizen 是一个撰写合格 commit message 的工具，用于代替 git commit 指令。
 
-`sudo npm install -g commitizen`
+1. 全局安装 commitizen
+
+`sudo npm install -g commitizen` 
+commitizen 是一个撰写合格 commit message 的工具，用于代替 git commit 指令。
 
 2. 全局安装 cz-conventional-changelog
-> cz-conventional-changelog 适配器提供 conventional-changelog 标准（约定式提交标准）。
 
-`sudo npm install -g cz-conventional-changelog`
+`sudo npm install -g cz-conventional-changelog` 
+cz-conventional-changelog 适配器提供 conventional-changelog 标准（约定式提交标准）。
 
 3. 生成 commitizen 指定 Adapter 配置文件
 
-`echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc`
+`echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc` 
 
 ## 目录
-```
+
+``` 
 .
 ├── config                        配置目录
 │   ├── dev.js                    开发时配置
@@ -141,18 +160,25 @@ chore:    不修改src或者test的其余修改，例如构建过程或辅助工
 ```
 
 ## 说明
+
 ### 权限说明
-- 管理员 0
-- 用户 1
+
+* 管理员 0
+* 用户 1
 
 ### taro-ui mp-color-ui proxy-ui
+
 代理 ui 需要考虑组件 props 传值的问题，还需要考虑 message 组件 left css 属性未设置宽度不够的问题。
-1. 在 mp-color-ui 源码中修改了 message css 样式，添加了一行 `left: 0;`
+
+1. 在 mp-color-ui 源码中修改了 message css 样式，添加了一行 `left: 0;` 
 
 ## 报错
+
 ### [ 请先调用 init 完成初始化后再调用其他云 API ]
+
 1. 尝试清空小程序开发者工具中的缓存试试（可能是开发者工具的bug~）
-2. 检查项目是否运行中 `yarn dev:weapp`
+2. 检查项目是否运行中 `yarn dev:weapp` 
 
 ### [ 获取不到接口返回的数据 ]
+
 可能是云函数未同步，在开发者工具中上传云函数即可。
