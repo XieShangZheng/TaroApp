@@ -1,12 +1,13 @@
-import Taro, { useEffect, useState } from '@tarojs/taro'
+import Taro, { useEffect } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import { useSelector, useDispatch } from '@tarojs/redux'
 import { AtFab, AtFloatLayout, } from 'taro-ui'
-import { ClMessage } from 'mp-colorui'
+import AtMsg from '../../components/proxy-ui/AtMsg';
 import {
   SET_POST_FORM_IS_OPENED,
   SET_LOGIN_INFO,
   GET_POSTS,
+  LOGIN_SUCCESS,
 } from '../../constants'
 
 import { PostCard, PostForm } from '../../components'
@@ -30,13 +31,12 @@ interface User {
   }
 }
 export default function Index() {
-  const [showMessage, setShowMessage] = useState(false)
   const isOpened = useSelector((state: State) => state.post.isOpened)
   const posts = useSelector((state: State) => state.post.posts) || []
   const loginStatus = useSelector((state: User) => state.user.loginStatus)
   const authority = useSelector((state: User) => state.user.authority)
   const isPost = useSelector((state: State) => state.post.isPost)
-  const isLogged = loginStatus === 'LOGIN_SUCCESS';
+  const isLogged = loginStatus === LOGIN_SUCCESS;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -48,7 +48,15 @@ export default function Index() {
     async function getStorage() {
       try {
         const { data } = await Taro.getStorage({ key: 'userInfo' })
-        dispatch({ type: SET_LOGIN_INFO, payload: { ...data, userId: data._id } })
+        dispatch({
+          type: SET_LOGIN_INFO,
+          payload:
+          {
+            ...data,
+            userId: data._id,
+            loginStatus: LOGIN_SUCCESS,
+          }
+        })
       } catch (err) {
         console.log('getStorage ERR-index: ', err)
       }
@@ -80,15 +88,13 @@ export default function Index() {
   }
 
   const handleClickEdit = () => {
-    if (!isLogged) {
-      setShowMessage(true);
-    } else {
+    if(isLogged) {
       setIsOpened(true)
     }
   }
   return (
     <View className='index'>
-      <ClMessage type='warn' show={showMessage} message='您还未登录哦！' onClose={() => setShowMessage(false)} />
+      <AtMsg />
       {posts.map((post: any) => (
         <PostCard key={post._id} postId={post._id} post={post} isList />
       ))}
