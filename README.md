@@ -96,13 +96,16 @@ chore:    不修改src或者test的其余修改，例如构建过程或辅助工
 ## 插件/库
 ### git commit 工具
 1. 全局安装 commitizen
-> commitizen 是一个撰写合格 commit message 的工具，用于代替 git commit 指令。
-  `sudo npm install -g commitizen`
+  > commitizen 是一个撰写合格 commit message 的工具，用于代替 git commit 指令。
+
+`sudo npm install -g commitizen`
 2. 全局安装 cz-conventional-changelog
 > cz-conventional-changelog 适配器提供 conventional-changelog 标准（约定式提交标准）。
-  `sudo npm install -g cz-conventional-changelog`
+
+`sudo npm install -g cz-conventional-changelog`
 3. 生成 commitizen 指定 Adapter 配置文件
-  `echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc`
+
+`echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc`
 
 ## 目录
 ```
