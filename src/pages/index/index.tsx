@@ -64,6 +64,9 @@ export default function Index() {
     if (!isLogged) {
       getStorage();
     }
+  }, [isLogged, dispatch])
+
+  useEffect(() => {
     async function getPosts() {
       try {
         // 更新 Redux Store 数据
@@ -75,10 +78,10 @@ export default function Index() {
       }
     }
 
-    if (posts && !posts.length) {
+    if (!posts.length) {
       getPosts()
     }
-  }, [posts, isLogged, dispatch])
+  }, [posts, dispatch])
 
   const setIsOpened = state => {
     dispatch({
@@ -88,7 +91,7 @@ export default function Index() {
   }
 
   const handleClickEdit = () => {
-    if(isLogged) {
+    if (isLogged) {
       setIsOpened(true)
     }
   }
