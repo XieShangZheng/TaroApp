@@ -7,3 +7,4 @@ export const GET_POSTS = 'GET_POSTS'; // 获取帖子列表
 export const GET_POST = 'GET_POST'; // 获取帖子
 export const SET_POST = 'SET_POST'; // 更新帖子
 export const POST_NORMAL = 'POST_NORMAL';
+export const UPDATE_POSTS = 'UPDATE_POSTS'; // 清空帖子

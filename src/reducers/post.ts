@@ -8,6 +8,7 @@ import {
 	POST_SUCCESS,
 	GET_POSTS,
 	GET_POST,
+	UPDATE_POSTS,
 } from '../constants/';
 
 const INITIAL_STATE = {
@@ -30,6 +31,10 @@ export default function post(state = INITIAL_STATE, action) {
 			return { ...state, posts: state.posts.concat(...posts) };
 		}
 
+		case UPDATE_POSTS: {
+			return { ...state, posts: state.posts };
+		}
+
 		case SET_POST_FORM_IS_OPENED: {
 			const { isOpened } = action.payload;
 			return { ...state, isOpened };
@@ -40,6 +45,7 @@ export default function post(state = INITIAL_STATE, action) {
 		}
 
 		case POST_SUCCESS: {
+			// console.log('%cAT-state: ', 'color: #bf2c9f; background: pink; font-size: 13px;', state);
 			return { ...state, postStatus: POST_SUCCESS, isPost: false };
 		}
 
