@@ -12,6 +12,7 @@ import {
 	GET_POSTS,
 	GET_POST,
 	SET_POST,
+	UPDATE_POSTS,
 } from '../constants';
 
 function* createPost(postData, userId) {
@@ -69,6 +70,15 @@ function* getPosts() {
 		const posts = yield call(postApi.getPosts);
 
 		// 其实以下三步可以合成一步，但是这里为了讲解清晰，将它们拆分成独立的单元
+		// 先清空列表
+		if (posts.length) {
+			yield put({
+				type: UPDATE_POSTS,
+				payload: {
+					posts: [],
+				},
+			});
+		}
 
 		// 发起获取帖子成功的 action
 		yield put({ type: POST_SUCCESS });
@@ -91,7 +101,6 @@ function* getPosts() {
 function* watchGetPosts() {
 	while (true) {
 		yield take(GET_POSTS);
-
 		yield fork(getPosts);
 	}
 }
