@@ -1,4 +1,4 @@
-import Taro, { useEffect } from '@tarojs/taro'
+import Taro, { useEffect, useDidHide } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import { useSelector, useDispatch } from '@tarojs/redux'
 import { AtFab, AtFloatLayout, } from 'taro-ui'
@@ -21,7 +21,7 @@ interface State {
       id: string
     }]
     isOpened: boolean
-    isPost: boolean
+    isPosts: boolean
   }
 }
 interface User {
@@ -35,14 +35,14 @@ export default function Index() {
   const posts = useSelector((state: State) => state.post.posts) || []
   const loginStatus = useSelector((state: User) => state.user.loginStatus)
   const authority = useSelector((state: User) => state.user.authority)
-  const isPost = useSelector((state: State) => state.post.isPost)
+  const isPosts = useSelector((state: State) => state.post.isPosts)
   const isLogged = loginStatus === LOGIN_SUCCESS;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    isPost && Taro.showLoading({ title: '加载中' })
-    !isPost && Taro.hideLoading();
-  }, [isPost])
+    isPosts && Taro.showLoading({ title: '加载中' })
+    !isPosts && Taro.hideLoading();
+  }, [isPosts])
 
   useEffect(() => {
     async function getStorage() {
