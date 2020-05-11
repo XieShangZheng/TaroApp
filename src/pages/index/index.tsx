@@ -1,8 +1,7 @@
 import Taro, { useEffect, useDidHide } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import { useSelector, useDispatch } from '@tarojs/redux'
-import { AtFab, AtFloatLayout, } from 'taro-ui'
-import AtMsg from '../../components/proxy-ui/AtMsg';
+import { AtFab, AtFloatLayout, AtMessage } from 'taro-ui'
 import {
   SET_POST_FORM_IS_OPENED,
   SET_LOGIN_INFO,
@@ -38,6 +37,9 @@ export default function Index() {
   const isPosts = useSelector((state: State) => state.post.isPosts)
   const isLogged = loginStatus === LOGIN_SUCCESS;
   const dispatch = useDispatch();
+
+  useDidHide(() => {
+  })
 
   useEffect(() => {
     isPosts && Taro.showLoading({ title: '加载中' })
@@ -97,7 +99,7 @@ export default function Index() {
   }
   return (
     <View className='index'>
-      <AtMsg />
+      <AtMessage />
       {posts.map((post: any) => (
         <PostCard key={post._id} postId={post._id} post={post} isList />
       ))}
