@@ -12,7 +12,7 @@ export default function AtMsg() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    Taro.eventCenter.on('atMessage', (options = {}) => {
+    Taro.eventCenter.on('atMsg', (options = {}) => {
       const { message: asMsg, type: asType, duration: asDuration = 3 } = options
       setShow(true);
       setType(asType);
@@ -21,15 +21,11 @@ export default function AtMsg() {
     })
 
     // 绑定函数
-    Taro.atMessage = Taro.eventCenter.trigger.bind(
+    Taro.atMsg = Taro.eventCenter.trigger.bind(
       Taro.eventCenter,
-      'atMessage'
+      'atMsg'
     )
-
-    return () => {
-      Taro.eventCenter.off('atMessage')
-    }
-  })
+  }, [show])
 
   return (
     <ClMessage onClose={() => setShow(false)} message={message} type={type} duration={duration} show={show} />
