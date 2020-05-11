@@ -14,8 +14,9 @@ import {
 const INITIAL_STATE = {
 	posts: [],
 	post: {},
-	isOpened: false,
-	isPost: false,
+	isOpened: false, // 发帖 modal 框 (默认关闭)
+	isPosts: false, // 文章列表 loading 状态
+	isPost: false, // 文章详情 loading 加载状态
 	postStatus: POST_NORMAL,
 };
 
@@ -45,8 +46,7 @@ export default function post(state = INITIAL_STATE, action) {
 		}
 
 		case POST_SUCCESS: {
-			// console.log('%cAT-state: ', 'color: #bf2c9f; background: pink; font-size: 13px;', state);
-			return { ...state, postStatus: POST_SUCCESS, isPost: false };
+			return { ...state, postStatus: POST_SUCCESS, isPosts: false };
 		}
 
 		case POST_ERROR: {
@@ -54,7 +54,7 @@ export default function post(state = INITIAL_STATE, action) {
 		}
 
 		case GET_POSTS: {
-			return { ...state, postStatus: GET_POSTS, isPost: true };
+			return { ...state, postStatus: GET_POSTS, isPosts: true };
 		}
 
 		case GET_POST: {
