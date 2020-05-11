@@ -23,11 +23,10 @@ export default function PostForm() {
     e.preventDefault()
 
     if (!formTitle || !formContent) {
-      Taro.atMessage({
+      Taro.atMsg({
         message: '您还有内容没有填写完哦',
-        type: 'warning',
+        type: 'warn',
       })
-
       return
     }
 
