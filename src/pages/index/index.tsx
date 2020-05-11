@@ -38,9 +38,6 @@ export default function Index() {
   const isLogged = loginStatus === LOGIN_SUCCESS;
   const dispatch = useDispatch();
 
-  useDidHide(() => {
-  })
-
   useEffect(() => {
     isPosts && Taro.showLoading({ title: '加载中' })
     !isPosts && Taro.hideLoading();
@@ -97,6 +94,13 @@ export default function Index() {
       setIsOpened(true)
     }
   }
+
+  useDidHide(() => {
+    if (isOpened) {
+      setIsOpened(false);
+    }
+  })
+
   return (
     <View className='index'>
       <AtMessage />
