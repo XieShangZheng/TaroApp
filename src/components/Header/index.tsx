@@ -1,7 +1,6 @@
 import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { useSelector } from '@tarojs/redux'
-import { AtMessage } from 'taro-ui'
 
 import LoggedMine from '../LoggedMine'
 import WeAppLoginButton from '../WeAppLoginButton'
@@ -20,7 +19,6 @@ export default function Header() {
 
   return (
     <View className='user-box'>
-      <AtMessage />
       <LoggedMine />
       {!isLogged && (
         <View className='login-button-box'>
