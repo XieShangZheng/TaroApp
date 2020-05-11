@@ -88,7 +88,7 @@ chore:    不修改src或者test的其余修改，例如构建过程或辅助工
 * [ ] api 封装
 * [ ] api 调用控制台日志打印
 * [x] 引入 MP-ColorUI 组件库
-* [ ] 移除 taro-ui
+* [x] 移除 taro-ui
 * [x] mp-colorUI 的 message 的样式视觉效果宽度没有 100%，在源码中 dist/weapp/components/message/index.scss 中为 .cu-cl-message 添加 left: 0; 样式。
 
 ### 优化
@@ -97,10 +97,10 @@ chore:    不修改src或者test的其余修改，例如构建过程或辅助工
 
 修复登录状态
 
-* [ ] 重新登录后，点击发布按钮无反应
+* [x] 重新登录后，点击发布按钮无反应
 * [ ] 离开首页，将打开状态下的发布按钮改为关闭
 * [x] 刷新页面后，首页出现重复数据。
-* [ ] 点击发布按钮，无 message 提示消息
+* [x] 点击发布按钮，无 message 提示消息
 
 ## 最佳实践
 
