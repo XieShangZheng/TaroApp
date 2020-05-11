@@ -27,7 +27,7 @@ export default function LoggedMine() {
       {avatar ? (
         <Image src={avatar} className='mine-avatar' onClick={onImageClick} />
       ) : (
-          <AtAvatar size='large' circle text='铮' />
+          <AtAvatar size='large' circle text='墙' />
         )}
 
       <View className='mine-username'>{nickName}</View>
