@@ -1,6 +1,7 @@
 import Taro, { useEffect } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { useDispatch, useSelector } from '@tarojs/redux'
+import { AtMessage } from 'taro-ui'
 
 import { Header, Footer } from '../../components'
 import './mine.scss'
@@ -44,6 +45,7 @@ export default function Mine() {
 
   return (
     <View className='mine'>
+      <AtMessage />
       <Header />
       <Footer />
     </View>
