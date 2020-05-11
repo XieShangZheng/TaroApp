@@ -88,8 +88,6 @@ chore:    不修改src或者test的其余修改，例如构建过程或辅助工
 * [ ] api 封装
 * [ ] api 调用控制台日志打印
 * [x] 引入 MP-ColorUI 组件库
-* [x] 移除 taro-ui
-* [x] mp-colorUI 的 message 的样式视觉效果宽度没有 100%，在源码中 dist/weapp/components/message/index.scss 中为 .cu-cl-message 添加 left: 0; 样式。
 
 ### 优化
 
@@ -167,12 +165,6 @@ cz-conventional-changelog 适配器提供 conventional-changelog 标准（约定
 
 * 管理员 0
 * 用户 1
-
-### taro-ui mp-color-ui proxy-ui
-
-代理 ui 需要考虑组件 props 传值的问题，还需要考虑 message 组件 left css 属性未设置宽度不够的问题。
-
-1. 在 mp-color-ui 源码中修改了 message css 样式，添加了一行 `left: 0;` 
 
 ## 报错
 
