@@ -37,7 +37,6 @@ export default function Mine() {
       }
     }
 
-    console.log('%cAT-isLogged-useEffect(): ', 'color: #bf2c9f; background: pink; font-size: 13px;', isLogged);
     if (!isLogged) {
       getStorage()
     }
