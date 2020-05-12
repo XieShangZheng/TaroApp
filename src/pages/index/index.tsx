@@ -127,5 +127,5 @@ export default function Index() {
 }
 
 Index.config = {
-  navigationBarTitleText: '首页',
+  navigationBarTitleText: '表白墙',
 }
