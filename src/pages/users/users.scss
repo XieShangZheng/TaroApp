@@ -1,0 +1,24 @@
+.list {
+	box-sizing: border-box;
+	padding: 30px;
+	border-radius: 20px;
+	.item {
+		padding: 30px;
+		flex: 1;
+		display: flex;
+		box-sizing: border-box;
+		border-bottom: 2px solid #ddd;
+		background-color: #fff;
+		.btn {
+			margin-left: auto;
+		}
+		&:last-child {
+			border-bottom-left-radius: 20px;
+			border-bottom-right-radius: 20px;
+		}
+		&:first-child {
+			border-top-left-radius: 20px;
+			border-top-right-radius: 20px;
+		}
+	}
+}

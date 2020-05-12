@@ -7,9 +7,23 @@ export default function List() {
   const typeMenu = [
     { title: '用户列表', arrow: true },
   ]
+
+  const handleClick = event => {
+    let url = '';
+
+    if (!event) {
+      // 用户列表 0
+      url = `/pages/users/users`
+    }
+
+    Taro.navigateTo({
+      url
+    })
+  }
+
   return (
     <View className='menu'>
-      <ClMenuList card list={typeMenu} />
+      <ClMenuList onClick={handleClick} card list={typeMenu} />
     </View>
   )
 }
