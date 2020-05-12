@@ -1,24 +1,26 @@
 import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { useSelector } from '@tarojs/redux'
-
+import { LOGIN_SUCCESS } from '../../constants'
 import Logout from '../Logout'
 import './index.scss'
 
-type State = {
+interface User {
   user: {
-    nickName: string
+    loginStatus: string
+    authority: number
   }
 }
 
 export default function Footer() {
-  const nickName = useSelector((state: State) => state.user.nickName)
+  const authority = useSelector((state: User) => state.user.authority)
+  const loginStatus = useSelector((state: User) => state.user.loginStatus)
+  const isLogged = loginStatus === LOGIN_SUCCESS;
   // 双取反来构造字符串对应的布尔值，用于标志此时是否用户已经登录
-  const isLogged = !!nickName
 
   return (
     <View className='mine-footer'>
-      {isLogged && (
+      {isLogged && !authority && (
         <Logout />
       )}
       <View className='tuture-motto'>

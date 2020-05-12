@@ -33,7 +33,7 @@ export default function WeappLoginButton() {
     <AtButton
       openType='getUserInfo'
       onGetUserInfo={onGetUserInfo}
-      type='primary'
+      type='secondary'
       className='login-button'
       loading={isLogin}
     >

@@ -47,7 +47,9 @@ export default function Mine() {
     <View className='mine'>
       <AtMessage />
       <Header />
-      <Footer />
+      <View className='footerWrap'>
+        <Footer />
+      </View>
     </View>
   )
 }
