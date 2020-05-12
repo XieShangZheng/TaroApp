@@ -42,6 +42,13 @@
 					"id": -1,
 					"name": "我的",
 					"pathName": "pages/mine/mine",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "用户列表",
+					"pathName": "pages/users/users",
 					"scene": null
 				}
 			]
