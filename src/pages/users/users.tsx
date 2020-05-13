@@ -44,7 +44,7 @@ export default function Users() {
               <View className='angle'>{index}</View>
 
               {item.avatar && (
-                <ClAvatar headerArray={[{ url: item.avatar, bgColor: 'green' }]} shape='round' onClick={() => onImageClick(item.avatar)} />
+                <ClAvatar headerArray={[{ url: item.avatar, bgColor: 'light-green' }]} shape='round' onClick={() => onImageClick(item.avatar)} />
               )}
 
               <View className='name' style={{ width: pxTransform(500) }}>
