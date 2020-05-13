@@ -33,7 +33,7 @@ export default function post(state = INITIAL_STATE, action) {
 		}
 
 		case UPDATE_POSTS: {
-			return { ...state, posts: state.posts };
+			return { ...state, posts: action.payload.posts };
 		}
 
 		case SET_POST_FORM_IS_OPENED: {
