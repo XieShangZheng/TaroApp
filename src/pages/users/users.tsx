@@ -1,9 +1,39 @@
-import Taro, { pxTransform } from '@tarojs/taro'
+import Taro, { pxTransform, useEffect, } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { ClButton, ClText, ClIcon } from 'mp-colorui'
+import { useDispatch, useSelector } from '@tarojs/redux'
+import { GET_USERS } from '../../constants'
 import './users.scss'
 
+type State = {
+  users: {
+    users: [{
+      avatar: string
+      nickName: string
+      _id: string
+      updateAt: Date
+    }]
+  }
+}
+
 export default function Users() {
+  const dispatch = useDispatch()
+  const users = useSelector((state: State) => state.users.users)
+  console.log('%cAT-users: ', 'color: #bf2c9f; background: pink; font-size: 13px;', users);
+
+  useEffect(() => {
+    async function getUsers() {
+      try {
+        dispatch({
+          type: GET_USERS,
+        })
+      } catch (err) { console.log('getUsers ERR -> pages/users', err) }
+    }
+    if (!users.length) {
+      getUsers();
+    }
+  }, [users, dispatch])
+
   return (
     <View className='list'>
       <View className='item'>
