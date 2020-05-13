@@ -19,7 +19,6 @@ type State = {
 export default function Users() {
   const dispatch = useDispatch()
   const users = useSelector((state: State) => state.users.users)
-  console.log('%cAT-users: ', 'color: #bf2c9f; background: pink; font-size: 13px;', users);
 
   useEffect(() => {
     try {
