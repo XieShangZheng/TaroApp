@@ -13,12 +13,19 @@ type State = {
       _id: string
       updateAt: Date
     }]
+    isUsers: boolean
   }
 }
 
 export default function Users() {
   const dispatch = useDispatch()
   const users = useSelector((state: State) => state.users.users)
+  const isUsers = useSelector((state: State) => state.users.isUsers)
+
+  useEffect(() => {
+    isUsers && Taro.showLoading({ title: '加载中' })
+    !isUsers && Taro.hideLoading();
+  }, [isUsers])
 
   useEffect(() => {
     try {
