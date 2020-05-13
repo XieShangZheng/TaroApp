@@ -1,7 +1,8 @@
 import Taro, { pxTransform, useEffect, } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import { ClButton, ClText, ClIcon, ClAvatar } from 'mp-colorui'
+import { ClText, ClAvatar } from 'mp-colorui'
 import { useDispatch, useSelector } from '@tarojs/redux'
+import { Operation } from '../../components'
 import { GET_USERS } from '../../constants'
 import './users.scss'
 
@@ -56,9 +57,7 @@ export default function Users() {
               <View className='name' style={{ width: pxTransform(500) }}>
                 <ClText textColor='brown' cut align='left'>{item.nickName}</ClText>
               </View>
-              <View className='btn'>
-                <ClButton size='small' plain shape='round' shadow bgColor='green' plainSize='bold' >操作</ClButton>
-              </View>
+              <Operation data={item} />
             </View>
           )
         })
