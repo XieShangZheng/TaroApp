@@ -24,7 +24,7 @@ export default function LogoutButton() {
   }
 
   return (
-    <AtButton type='secondary' full loading={isLogout} onClick={handleLogout}>
+    <AtButton type='secondary' loading={isLogout} onClick={handleLogout}>
       退出登录
     </AtButton>
   )
