@@ -7,11 +7,10 @@ cloud.init({
 
 const db = cloud.database();
 
-
 // 云函数入口函数
 exports.main = async (event, context) => {
   try {
-    const { data } = await db.collection('user').orderBy('createdAt', 'desc').get();
+    const { data } = await db.collection('user').orderBy('createdAt', 'asc').get();
 
     return {
       users: data,
