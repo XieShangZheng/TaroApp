@@ -57,7 +57,7 @@ export default function Users() {
               <View className='name' style={{ width: pxTransform(500) }}>
                 <ClText textColor='brown' cut align='left'>{item.nickName}</ClText>
               </View>
-              <Operation data={item} />
+              <Operation userInfo={item} />
             </View>
           )
         })
