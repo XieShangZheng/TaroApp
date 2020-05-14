@@ -1,17 +1,19 @@
 import Taro, { useState } from '@tarojs/taro'
+import { useDispatch } from '@tarojs/redux'
+import { isEqual, isEmpty } from 'lodash'
 import { View } from '@tarojs/components'
 import { ClButton, ClModal } from 'mp-colorui'
 import { AtCheckbox, AtMessage } from 'taro-ui'
-import { isEqual, isEmpty } from 'lodash'
-import { ROLES } from '../../constants'
+import { ROLES, UPDATE_USER } from '../../constants'
 
 export default function Operation(data) {
+  const dispatch = useDispatch();
   const [isShow, setIsShow] = useState(false)
   const [checkedList, setCheckedList] = useState([])
 
   const handleOp = () => {
-    const info = data.data;
-    const roles = info.roles ? info.roles : [];
+    const { userInfo } = data;
+    const roles = userInfo.roles ? userInfo.roles : [];
     setCheckedList(roles)
     setIsShow(true)
   }
@@ -29,13 +31,23 @@ export default function Operation(data) {
 
   const handleConfirm = index => {
     if (index) {
-      const info = data.data;
-      const roles = info.roles ? info.roles : [];
+      const { userInfo } = data;
+      const roles = userInfo.roles ? userInfo.roles : [];
       if (!isEqual(roles, checkedList)) {
-        return;
+        // 修改权限后进行更新
+        try {
+          // 更新用户权限
+          dispatch({
+            type: UPDATE_USER,
+            payload: {
+              userData: { roles: checkedList },
+              userId: userInfo._id,
+            }
+          })
+        } catch (err) {
+          console.log(`updateUser ERR -> Operation/handleConfirm ${err}`);
+        }
       }
-
-      // 调用接口更新用户权限
     }
     handleClose()
   }
