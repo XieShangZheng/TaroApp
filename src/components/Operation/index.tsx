@@ -6,13 +6,13 @@ import { ClButton, ClModal } from 'mp-colorui'
 import { AtCheckbox, AtMessage } from 'taro-ui'
 import { ROLES, UPDATE_USER } from '../../constants'
 
-export default function Operation(data) {
+export default function Operation(props) {
   const dispatch = useDispatch();
   const [isShow, setIsShow] = useState(false)
   const [checkedList, setCheckedList] = useState([])
 
   const handleOp = () => {
-    const { userInfo } = data;
+    const { userInfo } = props;
     const roles = userInfo.roles ? userInfo.roles : [];
     setCheckedList(roles)
     setIsShow(true)
@@ -31,7 +31,7 @@ export default function Operation(data) {
 
   const handleConfirm = index => {
     if (index) {
-      const { userInfo } = data;
+      const { userInfo } = props;
       const roles = userInfo.roles ? userInfo.roles : [];
       if (!isEqual(roles, checkedList)) {
         // 修改权限后进行更新
