@@ -5,6 +5,9 @@ import {
 	LOGIN_ERROR,
 	LOGIN_NORMAL,
 	SET_LOGIN_OUT,
+	UPDATE_USER,
+	UPDATE_SUCCESS,
+	UPDATE_ERROR,
 } from '../constants/';
 
 const INITIAL_STATE = {
@@ -14,6 +17,8 @@ const INITIAL_STATE = {
 	isOpened: false,
 	isLogin: false,
 	loginStatus: LOGIN_NORMAL,
+	roles: [],
+	isUser: false,
 };
 
 export default function user(state = INITIAL_STATE, action) {
@@ -31,6 +36,8 @@ export default function user(state = INITIAL_STATE, action) {
 				loginStatus: LOGIN_NORMAL,
 				isLogin: false,
 				authority: 1,
+				roles: [],
+				isUser: false,
 			};
 		}
 
@@ -44,6 +51,19 @@ export default function user(state = INITIAL_STATE, action) {
 
 		case LOGIN_ERROR: {
 			return { ...state, loginStatus: LOGIN_ERROR, isLogin: false };
+		}
+
+		// 更新用户权限
+		case UPDATE_USER: {
+			return { ...state, isUser: true };
+		}
+
+		case UPDATE_SUCCESS: {
+			return { ...state, isUser: false };
+		}
+
+		case UPDATE_ERROR: {
+			return { ...state, isUser: false };
 		}
 
 		default:
