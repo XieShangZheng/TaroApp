@@ -19,8 +19,31 @@ async function login(userInfo) {
 	}
 }
 
+async function updateUser(userData, userId) {
+	const isWeApp = Taro.getEnv() === Taro.ENV_TYPE.WEAPP;
+	try {
+		if (isWeApp) {
+			if (!userId) {
+				console.log('userId 为空');
+				return;
+			}
+			const { result }: any = await Taro.cloud.callFunction({
+				name: 'updateUser',
+				data: {
+					userData,
+					userId,
+				},
+			});
+			return result.user;
+		}
+	} catch (err) {
+		console.log('updateUser ERR -> api/user.ts', err);
+	}
+}
+
 const userApi = {
 	login,
+	updateUser,
 };
 
 export default userApi;
