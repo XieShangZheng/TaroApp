@@ -11,7 +11,7 @@ async function getUsers() {
 			return result.users;
 		}
 	} catch (err) {
-		console.log('getUsers ERR ->', err);
+		console.log('getUsers ERR -> api/getUsers', err);
 	}
 }
 
