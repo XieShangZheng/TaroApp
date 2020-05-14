@@ -1,48 +1,50 @@
 import Taro, { useState } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { ClButton, ClModal } from 'mp-colorui'
-import { AtCheckbox } from 'taro-ui'
+import { AtCheckbox, AtMessage } from 'taro-ui'
+import { isEqual, isEmpty } from 'lodash'
+import { ROLES } from '../../constants'
 
 export default function Operation(data) {
-  const [normal, setNormal] = useState(false)
+  const [isShow, setIsShow] = useState(false)
+  const [checkedList, setCheckedList] = useState([])
 
-  const checkboxOption = [{
-    value: 'list1',
-    label: 'iPhone X',
-    desc: '部分地区提供电子普通发票，用户可自行打印，效力等同纸质普通发票，具体以实际出具的发票类型为准。'
-  }, {
-    value: 'list2',
-    label: 'HUAWEI P20'
-  }, {
-    value: 'list3',
-    label: 'OPPO Find X',
-    desc: '部分地区提供电子普通发票，用户可自行打印，效力等同纸质普通发票，具体以实际出具的发票类型为准。',
-    disabled: true
-  }, {
-    value: 'list4',
-    label: 'vivo NEX',
-    desc: '部分地区提供电子普通发票，用户可自行打印，效力等同纸质普通发票，具体以实际出具的发票类型为准。',
-    disabled: true
-  }]
-
-  const [checkedList, setCheckedList] = useState(['list1'])
   const handleOp = () => {
-    console.log('点击操作');
     const info = data.data;
-    console.log('%cAT-info-/Users/at/code/company/TaroApp/src/components/Operation/index.tsx: ', 'color: #bf2c9f; background: pink; font-size: 13px;', info);
-    setNormal(true)
+    const roles = info.roles ? info.roles : [];
+    setCheckedList(roles)
+    setIsShow(true)
   }
 
   const handleChange = (value) => {
-    console.log('%cAT-value-/Users/at/code/company/TaroApp/src/components/Operation/index.tsx: ', 'color: #bf2c9f; background: pink; font-size: 13px;', value);
     setCheckedList(value)
+  }
+
+  const handleClose = () => {
+    if (!isEmpty(checkedList)) {
+      setCheckedList([])
+    }
+    setIsShow(false)
+  }
+
+  const handleConfirm = index => {
+    if (index) {
+      const info = data.data;
+      const roles = info.roles ? info.roles : [];
+      if (!isEqual(roles, checkedList)) {
+        return;
+      }
+
+      // 调用接口更新用户权限
+    }
+    handleClose()
   }
 
   return (
     <View className='btn'>
       <ClButton size='small' plain shape='round' shadow bgColor='green' plainSize='bold' onClick={handleOp}>操作</ClButton>
       <ClModal
-        show={normal}
+        show={isShow}
         closeWithShadow
         title='权限设置'
         close
@@ -56,16 +58,17 @@ export default function Operation(data) {
             color: 'green'
           }
         ]}
-        onCancel={() => setNormal(false)}
-        onClose={() => setNormal(false)}
-        onClick={() => setNormal(false)}
+        onCancel={handleClose}
+        onClose={handleClose}
+        onClick={handleConfirm}
       >
         <AtCheckbox
-          options={checkboxOption}
+          options={ROLES}
           selectedList={checkedList}
           onChange={handleChange}
         ></AtCheckbox>
       </ClModal>
+      <AtMessage />
     </View>
   )
 }
