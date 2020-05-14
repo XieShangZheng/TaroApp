@@ -6,7 +6,15 @@ import { call, put, take, fork } from 'redux-saga/effects';
 // fork：在 saga 函数中无阻塞的调用 handlerSaga，即调用之后，不会阻塞后续的执行逻辑。
 
 import { userApi } from '../api';
-import { SET_LOGIN_INFO, LOGIN_SUCCESS, LOGIN, LOGIN_ERROR } from '../constants';
+import {
+	SET_LOGIN_INFO,
+	LOGIN_SUCCESS,
+	LOGIN,
+	LOGIN_ERROR,
+	UPDATE_USER,
+	UPDATE_SUCCESS,
+	GET_USERS,
+} from '../constants';
 
 /***************************** 登录逻辑开始 ************************************/
 
@@ -53,5 +61,25 @@ function* watchLogin() {
 
 /***************************** 登录逻辑结束 ************************************/
 
+function* updateUser(userData, userId) {
+	try {
+		//  更新用户的权限
+		yield call(userApi.updateUser, userData, userId);
+		yield put({ type: UPDATE_SUCCESS });
+		yield put({ type: GET_USERS });
+	} catch (err) {
+		console.log('updateUser ERR -> sagas/user', err);
+	}
+}
+
+function* watchUpdateUser() {
+	while (true) {
+		const { payload } = yield take(UPDATE_USER);
+
+		console.log('payload', payload);
+
+		yield fork(updateUser, payload.userData, payload.userId);
+	}
+}
 // eslint-disable-next-line import/prefer-default-export
-export { watchLogin };
+export { watchLogin, watchUpdateUser };

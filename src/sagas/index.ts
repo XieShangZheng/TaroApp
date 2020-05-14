@@ -1,6 +1,6 @@
 import { fork, all } from 'redux-saga/effects';
 
-import { watchLogin } from './user';
+import { watchLogin, watchUpdateUser } from './user';
 import { watchCreatePost, watchGetPosts, watchGetPost } from './post';
 import { watchGetUsers } from './users';
 
@@ -11,5 +11,6 @@ export default function* rootSaga() {
 		fork(watchGetPosts),
 		fork(watchGetPost),
 		fork(watchGetUsers),
+		fork(watchUpdateUser),
 	]);
 }
