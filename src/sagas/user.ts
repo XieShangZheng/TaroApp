@@ -67,6 +67,7 @@ function* updateUser(userData, userId) {
 		yield call(userApi.updateUser, userData, userId);
 		yield put({ type: UPDATE_SUCCESS });
 		yield put({ type: GET_USERS });
+		Taro.atMessage({ message: '操作成功', type: 'success' });
 	} catch (err) {
 		console.log('updateUser ERR -> sagas/user', err);
 	}
