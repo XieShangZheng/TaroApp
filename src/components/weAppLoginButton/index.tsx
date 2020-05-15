@@ -15,7 +15,7 @@ export default function WeappLoginButton() {
   const isLogin = useSelector((state: State) => state.user.isLogin)
   const dispatch = useDispatch()
 
-  async function onGetUserInfo(e) {
+  function onGetUserInfo(e) {
 
     const { avatarUrl, nickName } = e.detail.userInfo
     const userInfo = { avatar: avatarUrl, nickName }
