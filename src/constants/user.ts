@@ -7,4 +7,5 @@ export const LOGIN_ERROR = 'LOGIN_ERROR' // 设置登录失败信息
 export const LOGIN_NORMAL = 'LOGIN_NORMAL'
 
 export const UPDATE_USER = 'UPDATE_USER'; // 更新用户信息
-export const UPDATE_SUCCESS = 'UPDATE_SUCCESS'; // 更新状态
+export const UPDATE_SUCCESS = 'UPDATE_SUCCESS'; // 更新成功
+export const UPDATE_ERROR = 'UPDATE_ERROR'; // 更新失败
