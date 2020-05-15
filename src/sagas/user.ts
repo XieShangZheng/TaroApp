@@ -65,10 +65,11 @@ function* updateUser(userData, userId) {
 	try {
 		//  更新用户的权限
 		yield call(userApi.updateUser, userData, userId);
+		yield put({ type: GET_USERS, payload: { isUser: false } });
 		yield put({ type: UPDATE_SUCCESS });
-		yield put({ type: GET_USERS });
 		Taro.atMessage({ message: '操作成功', type: 'success' });
 	} catch (err) {
+		Taro.atMessage({ message: '操作失败', type: 'error' });
 		console.log('updateUser ERR -> sagas/user', err);
 	}
 }
