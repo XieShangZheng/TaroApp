@@ -1,15 +1,29 @@
 import Taro, { useState } from '@tarojs/taro'
-import { useDispatch } from '@tarojs/redux'
+import { useDispatch, useSelector } from '@tarojs/redux'
 import { isEqual, isEmpty } from 'lodash'
 import { View } from '@tarojs/components'
-import { ClButton, ClModal } from 'mp-colorui'
+import { ClButton, ClModal, ClTitleBar, ClLayout, ClFlex } from 'mp-colorui'
 import { AtCheckbox, AtMessage } from 'taro-ui'
 import { ROLES, UPDATE_USER } from '../../constants'
+import './index.scss'
 
-export default function Operation(props) {
+interface State {
+  user: {
+    isUser: boolean
+  }
+}
+interface Props {
+  userInfo: {
+    roles: []
+    _id: string
+    nickName: string
+  }
+}
+export default function Operation(props: Props) {
   const dispatch = useDispatch();
   const [isShow, setIsShow] = useState(false)
   const [checkedList, setCheckedList] = useState([])
+  const isUser = useSelector((state: State) => state.user.isUser)
 
   const handleOp = () => {
     const { userInfo } = props;
@@ -45,7 +59,7 @@ export default function Operation(props) {
             }
           })
         } catch (err) {
-          console.log(`updateUser ERR -> Operation/handleConfirm ${err}`);
+          throw new Error(`updateUser ERR -> Operation/handleConfirm ${err}`)
         }
       }
     }
@@ -55,32 +69,71 @@ export default function Operation(props) {
   return (
     <View className='btn'>
       <ClButton size='small' plain shape='round' shadow bgColor='green' plainSize='bold' onClick={handleOp}>操作</ClButton>
-      <ClModal
-        show={isShow}
-        closeWithShadow
-        title='权限设置'
-        close
-        actions={[
-          {
-            text: '取消',
-            color: 'black'
-          },
-          {
-            text: '确认',
-            color: 'green'
+
+      {
+        !isEmpty(props) &&
+        <ClModal
+          show={isShow}
+          closeWithShadow
+          close
+          custom
+          onCancel={handleClose}
+          renderTitle={
+            <ClTitleBar
+              title='权限操作'
+              textColor='black'
+              type='sub-title'
+              subTitle={props.userInfo.nickName ? props.userInfo.nickName : ''}
+              subTitleColor='cyan'
+            />
           }
-        ]}
-        onCancel={handleClose}
-        onClose={handleClose}
-        onClick={handleConfirm}
-      >
-        <AtCheckbox
-          options={ROLES}
-          selectedList={checkedList}
-          onChange={handleChange}
-        ></AtCheckbox>
-      </ClModal>
+          renderAction={
+            <ClLayout>
+              <ClFlex justify='around'>
+                <View className='flex-sub'>
+                  <ClButton
+                    bgColor='gray'
+                    long
+                    size='large'
+                    onClick={handleClose}
+                  >
+                    取消
+                </ClButton>
+                </View>
+                <View className='flex-sub'>
+                  <ClButton
+                    bgColor='green'
+                    long
+                    size='large'
+                    onClick={handleConfirm}
+                    loading={isUser}
+                  >
+                    确认
+                </ClButton>
+                </View>
+              </ClFlex>
+            </ClLayout>
+          }
+        >
+          <AtCheckbox
+            options={ROLES}
+            selectedList={checkedList}
+            onChange={handleChange}
+          ></AtCheckbox>
+        </ClModal>
+      }
       <AtMessage />
     </View>
   )
 }
+
+// Operation.defaultProps = {
+//   userInfo: {
+//     avatar: '',
+//     createdAt: '',
+//     nickName: '',
+//     roles: [],
+//     updatedAt: '',
+//     _id: '',
+//   }
+// }

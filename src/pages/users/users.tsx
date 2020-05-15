@@ -2,21 +2,26 @@ import Taro, { pxTransform, useEffect, } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { ClText, ClAvatar } from 'mp-colorui'
 import { useDispatch, useSelector } from '@tarojs/redux'
+import { ReactNode } from 'react'
 import { Operation } from '../../components'
 import { GET_USERS } from '../../constants'
 import './users.scss'
 
+interface User {
+  avatar: string
+  nickName: string
+  _id: string
+  updateAt: Date
+  roles: []
+}
+
 type State = {
   users: {
-    users: [{
-      avatar: string
-      nickName: string
-      _id: string
-      updateAt: Date
-    }]
+    users: [User]
     isUsers: boolean
   }
 }
+
 
 export default function Users() {
   const dispatch = useDispatch()
@@ -34,7 +39,7 @@ export default function Users() {
         type: GET_USERS,
       })
     } catch (err) { console.log('getUsers ERR -> pages/users', err) }
-  }, [])
+  }, [dispatch])
 
   const onImageClick = (avatar) => {
     Taro.previewImage({
@@ -45,7 +50,7 @@ export default function Users() {
   return (
     <View className='list'>
       {
-        users.length && users.map((item, index): any => {
+        users.length && users.map((item: User, index): ReactNode => {
           return (
             <View className='item' key={item._id}>
               <View className='angle'>{index}</View>
