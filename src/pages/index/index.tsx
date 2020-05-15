@@ -26,14 +26,14 @@ interface State {
 interface User {
   user: {
     loginStatus: string
-    authority: number
+    roles: string[]
   }
 }
 export default function Index() {
   const isOpened = useSelector((state: State) => state.post.isOpened)
   const posts = useSelector((state: State) => state.post.posts) || []
   const loginStatus = useSelector((state: User) => state.user.loginStatus)
-  const authority = useSelector((state: User) => state.user.authority)
+  const roles = useSelector((state: User) => state.user.roles)
   const isPosts = useSelector((state: State) => state.post.isPosts)
   const isLogged = loginStatus === LOGIN_SUCCESS;
   const dispatch = useDispatch();
@@ -115,7 +115,7 @@ export default function Index() {
         <PostForm />
       </AtFloatLayout>
       {
-        authority === 0 &&
+        roles.includes('0') &&
         <View className='post-button'>
           <AtFab onClick={() => handleClickEdit()}>
             <Text className='at-fab__icon at-icon at-icon-edit'></Text>
