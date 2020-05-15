@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from '@tarojs/redux'
 import { AtMessage, AtCheckbox } from 'taro-ui'
 import { isEqual, isEmpty } from 'lodash'
 import { ReactNode } from 'react'
-import { GET_USERS, ROLES, UPDATE_USER } from '../../constants'
+import { GET_USERS, ROLES, UPDATE_USER, LOGIN_SUCCESS, SET_LOGIN_INFO, LOGIN } from '../../constants'
 
 import './users.scss'
 
@@ -14,7 +14,7 @@ interface User {
   nickName: string
   _id: string
   updateAt: Date
-  roles: []
+  roles: string[]
   isUser: boolean
 }
 
@@ -29,14 +29,52 @@ interface UpdateUser {
   user: User
 }
 
+interface State {
+  user: {
+    loginStatus: string
+    roles: string[]
+    _id: string
+    nickName: string
+    avatar: string
+  }
+}
+
 export default function Users() {
   const dispatch = useDispatch()
   const users = useSelector((state: Users) => state.users.users)
   const isUsers = useSelector((state: Users) => state.users.isUsers)
-  const [isShow, setIsShow] = useState(false)
-  const [checkedList, setCheckedList] = useState([])
   const isUser = useSelector((state: UpdateUser) => state.user.isUser)
+  const roles = useSelector((state: State) => state.user.roles)
+  const userId = useSelector((state: State) => state.user._id)
+  const user = useSelector((state: State) => state.user)
+  const loginStatus = useSelector((state: State) => state.user.loginStatus)
+  const isLogged = loginStatus === LOGIN_SUCCESS;
+
   const [userInfo, setUserInfo] = useState({ _id: '', roles: [], nickName: '', })
+  const [checkedList, setCheckedList] = useState([])
+  const [isShow, setIsShow] = useState(false)
+
+  useEffect(() => {
+    async function getStorage() {
+      try {
+        const { data } = await Taro.getStorage({ key: 'userInfo' })
+        dispatch({
+          type: SET_LOGIN_INFO,
+          payload:
+          {
+            ...data,
+            userId: data._id,
+            loginStatus: LOGIN_SUCCESS,
+          }
+        })
+      } catch (err) {
+        console.log('getStorage ERR-index: ', err)
+      }
+    }
+    if (!isLogged) {
+      getStorage();
+    }
+  }, [isLogged, dispatch])
 
   useEffect(() => {
     isUsers && Taro.showLoading({ title: '加载中' })
@@ -59,11 +97,11 @@ export default function Users() {
     })
   }
 
-  const handleOp = (user) => {
-    const roles = user.roles ? user.roles : [];
-    setCheckedList(roles) // 权限勾选状态
+  const handleOp = userDetail => {
+    const roleList = userDetail.roles ? userDetail.roles : [];
+    setCheckedList(roleList) // 权限勾选状态
     setIsShow(true) // 显示 modal
-    setUserInfo(user) // 当前选中的用户信息
+    setUserInfo(userDetail) // 当前选中的用户信息
   }
 
   const handleChange = (value) => {
@@ -77,10 +115,19 @@ export default function Users() {
     setIsShow(false)
   }
 
+  const onGetUserInfo = () => {
+    dispatch({
+      type: LOGIN,
+      payload: {
+        userInfo: { nickName: user.nickName, avatar: user.avatar },
+      },
+    })
+  }
+
   const handleConfirm = index => {
     if (index) {
-      const roles = userInfo.roles ? userInfo.roles : [];
-      if (!isEqual(roles, checkedList)) {
+      const roleList = userInfo.roles ? userInfo.roles : [];
+      if (!isEqual(roleList, checkedList)) {
         // 修改权限后进行更新
         try {
           // 更新用户权限
@@ -91,11 +138,16 @@ export default function Users() {
               userId: userInfo._id,
             }
           })
+          if (userId === userInfo._id) {
+            // 若改了自己的账号权限，重新登录一下
+            onGetUserInfo()
+          }
         } catch (err) {
           throw new Error(`updateUser ERR -> handleConfirm ${err}`)
         }
       }
     }
+
     handleClose()
   }
 
@@ -114,7 +166,7 @@ export default function Users() {
               <View className='name' style={{ width: pxTransform(500) }}>
                 <ClText textColor='brown' cut align='left'>{item.nickName}</ClText>
               </View>
-              <ClButton size='small' plain shape='round' shadow bgColor='green' plainSize='bold' onClick={() => handleOp(item)}>操作</ClButton>
+              {roles.includes('2') && <ClButton size='small' plain shape='round' shadow bgColor='green' plainSize='bold' onClick={() => handleOp(item)}>操作</ClButton>}
             </View>
           )
         })
