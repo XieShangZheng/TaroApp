@@ -9,14 +9,14 @@ import { SET_LOGIN_INFO, LOGIN_SUCCESS } from '../../constants'
 interface User {
   user: {
     loginStatus: string
-    authority: string
+    roles: string[]
   }
 }
 
 export default function Mine() {
   const dispatch = useDispatch()
   const loginStatus = useSelector((state: User) => state.user.loginStatus)
-  const authority = useSelector((state: User) => state.user.authority)
+  const roles = useSelector((state: User) => state.user.roles)
   const isLogged = loginStatus === 'LOGIN_SUCCESS';
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export default function Mine() {
       <AtMessage />
       <Header />
       {
-        isLogged && !authority && <List />
+        isLogged && roles.includes('1') && <List />
       }
       <View className='footerWrap'>
         <Footer />
