@@ -6,12 +6,6 @@ cloud.init({
 })
 const db = cloud.database()
 
-// 权限
-const authority = {
-  admin: 0, // 管理员
-  user: 1, // 普通用户
-}
-
 // 云函数入口函数
 exports.main = async (event, context) => {
   const { userInfo } = event
@@ -34,7 +28,7 @@ exports.main = async (event, context) => {
           ...userInfo,
           createdAt: db.serverDate(),
           updatedAt: db.serverDate(),
-          authority: authority.user,
+          roles: [],
         },
       })
 
