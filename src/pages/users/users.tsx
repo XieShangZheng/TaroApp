@@ -166,7 +166,11 @@ export default function Users() {
               <View className='name' style={{ width: pxTransform(500) }}>
                 <ClText textColor='brown' cut align='left'>{item.nickName}</ClText>
               </View>
-              {roles.includes('2') && <ClButton size='small' plain shape='round' shadow bgColor='green' plainSize='bold' onClick={() => handleOp(item)}>操作</ClButton>}
+              {roles.includes('2') &&
+                <View style={{ width: '150rpx' }}>
+                  <ClButton plain long shadow bgColor='green' onClick={() => handleOp(item)}>操作</ClButton>
+                </View>
+              }
             </View>
           )
         })

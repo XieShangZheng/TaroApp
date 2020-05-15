@@ -1,7 +1,7 @@
 import Taro, { useState } from '@tarojs/taro'
 import { View, Form, Input, Textarea } from '@tarojs/components'
-import { AtButton } from 'taro-ui'
 import { useDispatch, useSelector } from '@tarojs/redux'
+import { ClButton } from 'mp-colorui'
 
 import './index.scss'
 import { CREATE_POST } from '../../constants'
@@ -47,28 +47,24 @@ export default function PostForm() {
 
   return (
     <View className='post-form'>
-      <Form onSubmit={handleSubmit}>
-        <View>
-          <View className='form-hint'>标题</View>
-          <Input
-            className='input-title'
-            type='text'
-            placeholder='点击输入标题'
-            value={formTitle}
-            onInput={e => setFormTitle(e.detail.value)}
-          />
-          <View className='form-hint'>正文</View>
-          <Textarea
-            placeholder='点击输入正文'
-            className='input-content'
-            value={formContent}
-            onInput={e => setFormContent(e.detail.value)}
-          />
-          <AtButton formType='submit' type='primary'>
-            提交
-          </AtButton>
-        </View>
-      </Form>
+      <View>
+        <View className='form-hint'>标题</View>
+        <Input
+          className='input-title'
+          type='text'
+          placeholder='点击输入标题'
+          value={formTitle}
+          onInput={e => setFormTitle(e.detail.value)}
+        />
+        <View className='form-hint'>正文</View>
+        <Textarea
+          placeholder='点击输入正文'
+          className='input-content'
+          value={formContent}
+          onInput={e => setFormContent(e.detail.value)}
+        />
+        <ClButton onClick={handleSubmit} size='large' plain shadow long bgColor='green' >提交</ClButton>
+      </View>
     </View>
   )
 }

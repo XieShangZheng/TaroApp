@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import { useSelector } from '@tarojs/redux'
-import { AtAvatar } from 'taro-ui';
+import { ClAvatar } from 'mp-colorui';
 
 import './index.scss'
 
@@ -27,7 +27,7 @@ export default function LoggedMine() {
       {avatar ? (
         <Image src={avatar} className='mine-avatar' onClick={onImageClick} />
       ) : (
-          <AtAvatar size='large' circle text='墙' />
+          <ClAvatar headerArray={[{ text: '❤', bgColor: 'light-green' }]} size='xlarge' shadow shape='round' />
         )}
 
       <View className='mine-username'>{nickName}</View>

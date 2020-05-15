@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
 import { useDispatch, useSelector } from '@tarojs/redux'
-import { AtButton } from 'taro-ui'
+import { ClButton } from 'mp-colorui'
 
 import './index.scss'
 import { LOGIN } from '../../constants'
@@ -30,14 +30,16 @@ export default function WeappLoginButton() {
   }
 
   return (
-    <AtButton
+    <ClButton
       openType='getUserInfo'
       onGetUserInfo={onGetUserInfo}
-      type='secondary'
-      className='login-button'
+      plain
       loading={isLogin}
-    >
-      微信登录
-    </AtButton>
+      long
+      size='large'
+      className='login-button'
+      bgColor='mauve'
+      shadow
+    >微信登录</ClButton>
   )
 }

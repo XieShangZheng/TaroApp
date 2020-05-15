@@ -1,8 +1,8 @@
 import Taro, { useState } from '@tarojs/taro'
-import { AtButton } from 'taro-ui'
 import { useDispatch } from '@tarojs/redux'
+import { ClButton } from 'mp-colorui'
 
-import {  SET_LOGIN_OUT } from '../../constants'
+import { SET_LOGIN_OUT } from '../../constants'
 
 export default function LogoutButton() {
   const [isLogout, setIsLogout] = useState(false)
@@ -24,8 +24,6 @@ export default function LogoutButton() {
   }
 
   return (
-    <AtButton type='secondary' loading={isLogout} onClick={handleLogout}>
-      退出登录
-    </AtButton>
+    <ClButton plain shape='round' long shadow bgColor='green' size='large' loading={isLogout} onClick={handleLogout} >退出登录</ClButton>
   )
 }
