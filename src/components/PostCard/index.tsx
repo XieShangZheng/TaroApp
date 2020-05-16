@@ -30,7 +30,6 @@ export default function PostCard(props: Props) {
 	const { avatar, nickName } = user || {};
 	const headerArray = [{ url: avatar }]
 	const roles = useSelector((state: User) => state.user.roles)
-	console.log('%cAT-roles: ', 'color: #bf2c9f; background: pink; font-size: 13px;', roles);
 
 	const handleClick = () => {
 		const postId = props.postId;
