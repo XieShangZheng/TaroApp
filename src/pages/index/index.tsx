@@ -90,9 +90,10 @@ export default function Index() {
   }
 
   const handleClickEdit = () => {
-    if (isLogged) {
-      setIsOpened(true)
-    }
+    const url = '/pages/publish/publish'
+    Taro.navigateTo({
+      url
+    })
   }
 
   useDidHide(() => {
@@ -107,13 +108,6 @@ export default function Index() {
       {posts.map((post: any) => (
         <PostCard key={post._id} postId={post._id} post={post} isList />
       ))}
-      <AtFloatLayout
-        isOpened={isOpened}
-        title='发表新文章'
-        onClose={() => setIsOpened(false)}
-      >
-        <PostForm />
-      </AtFloatLayout>
       {
         roles.includes('0') &&
         <View className='post-button'>

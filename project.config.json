@@ -49,6 +49,13 @@
 					"id": -1,
 					"name": "用户列表",
 					"pathName": "pages/users/users",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "发布文章",
+					"pathName": "pages/publish/publish",
 					"scene": null
 				}
 			]
