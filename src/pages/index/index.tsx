@@ -1,7 +1,7 @@
 import Taro, { useEffect, useDidHide } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import { useSelector, useDispatch } from '@tarojs/redux'
-import { AtFab, AtFloatLayout, AtMessage } from 'taro-ui'
+import { AtFab, AtMessage } from 'taro-ui'
 import {
   SET_POST_FORM_IS_OPENED,
   SET_LOGIN_INFO,
@@ -9,7 +9,7 @@ import {
   LOGIN_SUCCESS,
 } from '../../constants'
 
-import { PostCard, PostForm } from '../../components'
+import { PostCard } from '../../components'
 import './index.scss'
 
 interface State {
