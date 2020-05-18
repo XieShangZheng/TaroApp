@@ -1,3 +1,7 @@
+/* eslint-disable import/no-commonjs */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const path = require('path');
+
 const config = {
   projectName: 'TaroApp',
   date: '2020-4-2',
@@ -21,11 +25,11 @@ const config = {
       'transform-class-properties',
       'transform-object-rest-spread',
       ['transform-runtime', {
-          helpers: false,
-          polyfill: false,
-          regenerator: true,
-          moduleName: 'babel-runtime'
-        }
+        helpers: false,
+        polyfill: false,
+        regenerator: true,
+        moduleName: 'babel-runtime'
+      }
       ]
     ]
   },
@@ -87,6 +91,11 @@ const config = {
         }
       }
     }
+  },
+  alias: {
+    '@/components': path.resolve(__dirname, '..', 'src/components'),
+    '@/constants': path.resolve(__dirname, '..', 'src/constants'),
+    '@/actions': path.resolve(__dirname, '..', 'src/actions'),
   }
 }
 
