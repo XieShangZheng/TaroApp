@@ -1,34 +1,40 @@
 import Taro, { useState } from '@tarojs/taro'
-import { ClTextarea } from 'mp-colorui'
+import { View } from '@tarojs/components'
+import { ClTextarea, ClLayout, ClButton } from 'mp-colorui'
 import './publish.scss'
 
 export default function Publish() {
-  const [height, setHeight] = useState(200)
+  const [height, setHeight] = useState(400)
   const onLineChange = event => {
-    console.log('%cAT-event: ', 'color: #bf2c9f; background: pink; font-size: 13px;', event);
-    const { height: asHeight, heightRpx, lineHeight, lineCount } = event;
-    // if (lineHeight * (lineCount + 1) * 2 > height / 2) {
-    // setHeight(asHeight * 2)
-    // }
-    if (lineCount >= height / 50 - 1) {
-      const h = height + 50;
-      console.log('%cAT-h: ', 'color: #bf2c9f; background: pink; font-size: 13px;', h);
-      setHeight(h)
-    } else {
-      setHeight(200)
+    const { heightRpx, lineCount } = event;
+    setHeight(heightRpx)
+
+    if (heightRpx < 400 || !lineCount) {
+      setHeight(400)
     }
   }
   return (
-    // <ClTextarea placeholder='请输入...' autoFocus height={200} />
-    <ClTextarea
-      shadow
-      // showLengthTip
-      height={height}
-      bgColor='light-brown'
-      placeholder='请输入...'
-      autoFocus
-      showConfirmBar
-      onLineChange={onLineChange}
-    />
+    <ClLayout margin='small'>
+      <View className='textareaWrap'>
+        <ClTextarea
+          showLengthTip
+          height={height}
+          bgColor='white'
+          placeholder='请输入...'
+          autoFocus
+          showConfirmBar
+          onLineChange={onLineChange}
+        />
+        <View className='footer'>
+          <View className='picBtn'>+ 添加图片（最多9张）</View>
+          <View className='release'>
+            <ClButton bgColor='white' shadow={false} >确认发布</ClButton>
+          </View>
+        </View>
+      </View>
+    </ClLayout>
   )
+}
+Publish.config = {
+  navigationBarTitleText: '发布'
 }
