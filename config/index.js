@@ -66,6 +66,28 @@ const config = {
           generateScopedName: '[name]__[local]___[hash:base64:5]'
         }
       }
+    },
+    webpackChain(chain, webpack) {
+      chain.merge({
+        optimization: {
+          splitChunks: {
+            cacheGroups: {
+              lodash: {
+                name: 'lodash',
+                priority: 1000,
+                test(module) {
+                  return /node_modules[\\/]lodash/.test(module.context)
+                }
+              }
+            }
+          }
+        }
+      })
+      chain.plugin('analyzer').use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin, [])
+    },
+    commonChunks(commonChunks) {
+      commonChunks.push('lodash')
+      return commonChunks
     }
   },
   h5: {
