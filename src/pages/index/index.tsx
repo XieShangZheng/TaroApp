@@ -1,11 +1,10 @@
-import Taro, { useEffect, useDidHide } from '@tarojs/taro'
+import Taro, { useEffect } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import { useSelector, useDispatch } from '@tarojs/redux'
 import { AtFab, AtMessage } from 'taro-ui'
 import PostCard from '@/components/PostCard'
 
 import {
-  SET_POST_FORM_IS_OPENED,
   SET_LOGIN_INFO,
   GET_POSTS,
   LOGIN_SUCCESS,
@@ -31,7 +30,6 @@ interface User {
   }
 }
 export default function Index() {
-  const isOpened = useSelector((state: State) => state.post.isOpened)
   const posts = useSelector((state: State) => state.post.posts) || []
   const loginStatus = useSelector((state: User) => state.user.loginStatus)
   const roles = useSelector((state: User) => state.user.roles)
@@ -83,25 +81,12 @@ export default function Index() {
     }
   }, [posts, dispatch])
 
-  const setIsOpened = state => {
-    dispatch({
-      type: SET_POST_FORM_IS_OPENED,
-      payload: { isOpened: state },
-    })
-  }
-
   const handleClickEdit = () => {
     const url = '/pages/publish/publish'
     Taro.navigateTo({
       url
     })
   }
-
-  useDidHide(() => {
-    if (isOpened) {
-      setIsOpened(false);
-    }
-  })
 
   return (
     <View className='index'>

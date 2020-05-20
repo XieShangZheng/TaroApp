@@ -8,7 +8,6 @@ import {
 	POST_SUCCESS,
 	POST_ERROR,
 	SET_POSTS,
-	SET_POST_FORM_IS_OPENED,
 	GET_POSTS,
 	GET_POST,
 	SET_POST,
@@ -24,9 +23,6 @@ function* createPost(postData, userId) {
 
 		// 发起发帖成功的 action
 		yield put({ type: POST_SUCCESS });
-
-		// 关闭发帖框弹出层
-		yield put({ type: SET_POST_FORM_IS_OPENED, payload: { isOpened: false } });
 
 		// 更新 Redux store 数据
 		yield put({

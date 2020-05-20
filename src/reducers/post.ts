@@ -1,7 +1,6 @@
 import {
 	SET_POST,
 	SET_POSTS,
-	SET_POST_FORM_IS_OPENED,
 	POST_ERROR,
 	CREATE_POST,
 	POST_NORMAL,
@@ -29,16 +28,12 @@ export default function post(state = INITIAL_STATE, action) {
 
 		case SET_POSTS: {
 			const { posts } = action.payload;
-			return { ...state, posts: state.posts.concat(...posts) };
+			const newPosts = [ ...posts, ...state.posts ];
+			return { ...state, posts: newPosts };
 		}
 
 		case UPDATE_POSTS: {
 			return { ...state, posts: action.payload.posts };
-		}
-
-		case SET_POST_FORM_IS_OPENED: {
-			const { isOpened } = action.payload;
-			return { ...state, isOpened };
 		}
 
 		case CREATE_POST: {
