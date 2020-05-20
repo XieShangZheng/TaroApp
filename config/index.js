@@ -115,9 +115,9 @@ const config = {
     }
   },
   alias: {
-    '@/components': path.resolve(__dirname, '..', 'src/components'),
-    '@/constants': path.resolve(__dirname, '..', 'src/constants'),
-    '@/actions': path.resolve(__dirname, '..', 'src/actions'),
+    '@/components': path.resolve(__dirname, '..', 'src/components/index'),
+    '@/constants': path.resolve(__dirname, '..', 'src/constants/index'),
+    '@/actions': path.resolve(__dirname, '..', 'src/actions/index'),
   }
 }
 
