@@ -2,7 +2,7 @@ import Taro, { useState } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { ClTextarea, ClLayout, ClButton } from 'mp-colorui'
 import { useDispatch, useSelector } from '@tarojs/redux'
-import { CREATE_POST } from '@/constants/index'
+import { CREATE_POST, POST_SUCCESS } from '@/constants/'
 import { AtMessage } from 'taro-ui'
 
 import './publish.scss'
@@ -12,10 +12,18 @@ interface State {
     userId: string
   }
 }
+interface Post {
+  post: {
+    isPost: boolean
+    postStatus: string
+  }
+}
 export default function Publish() {
   const [height, setHeight] = useState(400)
   const [content, setContent] = useState('')
   const userId = useSelector((state: State) => state.user.userId)
+  const isPost = useSelector((state: Post) => state.post.isPost)
+  const postStatus = useSelector((state: Post) => state.post.postStatus)
   const dispatch = useDispatch()
 
   const onLineChange = event => {
@@ -53,7 +61,12 @@ export default function Publish() {
       },
     })
     setContent('')
-    Taro.switchTab({ url: '/pages/index/index' })
+    if (postStatus === POST_SUCCESS) {
+      // 发布成功，跳转首页
+      setTimeout(() => {
+        Taro.switchTab({ url: '/pages/index/index' })
+      }, 1000);
+    }
   }
 
   return (
@@ -73,7 +86,7 @@ export default function Publish() {
         <View className='footer'>
           <View className='picBtn'>+ 添加图片（最多9张）</View>
           <View className='release'>
-            <ClButton bgColor='white' shadow={false} onClick={handleSubmit} >确认发布</ClButton>
+            <ClButton bgColor='white' shadow={false} loading={isPost} onClick={handleSubmit} >确认发布</ClButton>
           </View>
         </View>
       </View>
