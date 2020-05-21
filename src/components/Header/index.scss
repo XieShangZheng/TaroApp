@@ -1,10 +1,12 @@
+@import '../../asset/index';
+
 .user-box {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 350px;
-  background-color: #02b875;
+  background-color: $color-brand;
 }
 
 .login-button-box {
