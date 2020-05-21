@@ -5,6 +5,7 @@ import { postApi } from '../api';
 
 import {
 	CREATE_POST,
+	POSTS_SUCCESS,
 	POST_SUCCESS,
 	POST_ERROR,
 	SET_POSTS,
@@ -18,10 +19,10 @@ function* createPost(postData, userId) {
 	try {
 		const post = yield call(postApi.createPost, postData, userId);
 
-		// 其实以下三步可以合成一步，但是这里为了讲解清晰，将它们拆分成独立的单元
-
 		// 发起发帖成功的 action
-		yield put({ type: POST_SUCCESS });
+		yield put({
+			type: POST_SUCCESS,
+		});
 
 		// 更新 Redux store 数据
 		yield put({
@@ -35,6 +36,7 @@ function* createPost(postData, userId) {
 		Taro.atMessage({
 			message: '发表文章成功',
 			type: 'success',
+			duration: 700,
 		});
 	} catch (err) {
 		console.log('createPost ERR: ', err);
@@ -76,7 +78,7 @@ function* getPosts() {
 		}
 
 		// 发起获取帖子成功的 action
-		yield put({ type: POST_SUCCESS });
+		yield put({ type: POSTS_SUCCESS });
 
 		// 更新 Redux store 数据
 		yield put({

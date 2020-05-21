@@ -5,6 +5,7 @@ import {
 	CREATE_POST,
 	POST_NORMAL,
 	POST_SUCCESS,
+	POSTS_SUCCESS,
 	GET_POSTS,
 	GET_POST,
 	UPDATE_POSTS,
@@ -26,34 +27,39 @@ export default function post(state = INITIAL_STATE, action) {
 			return { ...state, post: asPost, isPost: false };
 		}
 
-		case SET_POSTS: {
-			const { posts } = action.payload;
-			const newPosts = [ ...posts, ...state.posts ];
-			return { ...state, posts: newPosts };
+		case CREATE_POST: {
+			return { ...state, postStatus: CREATE_POST, isPost: true };
+		}
+
+		case POST_SUCCESS: {
+			return { ...state, postStatus: POST_SUCCESS, isPost: false };
+		}
+
+
+		case POST_ERROR: {
+			return { ...state, postStatus: POST_ERROR, isPost: false };
+		}
+
+		case GET_POST: {
+			return { ...state, postStatus: GET_POST, isPost: true };
+		}
+
+		case GET_POSTS: {
+			return { ...state, postsStatus: GET_POSTS, isPosts: true };
+		}
+
+		case POSTS_SUCCESS: {
+			return { ...state, postsStatus: POSTS_SUCCESS, isPosts: false };
 		}
 
 		case UPDATE_POSTS: {
 			return { ...state, posts: action.payload.posts };
 		}
 
-		case CREATE_POST: {
-			return { ...state, postStatus: CREATE_POST, isPost: true };
-		}
-
-		case POST_SUCCESS: {
-			return { ...state, postStatus: POST_SUCCESS, isPosts: false };
-		}
-
-		case POST_ERROR: {
-			return { ...state, postStatus: POST_ERROR, isPost: false };
-		}
-
-		case GET_POSTS: {
-			return { ...state, postStatus: GET_POSTS, isPosts: true };
-		}
-
-		case GET_POST: {
-			return { ...state, postStatus: GET_POST, isPost: true };
+		case SET_POSTS: {
+			const { posts } = action.payload;
+			const newPosts = [ ...posts, ...state.posts ];
+			return { ...state, posts: newPosts };
 		}
 
 		default:
