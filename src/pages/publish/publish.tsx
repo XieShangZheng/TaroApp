@@ -1,4 +1,4 @@
-import Taro, { useState } from '@tarojs/taro'
+import Taro, { useState, useEffect } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { ClTextarea, ClLayout, ClButton } from 'mp-colorui'
 import { useDispatch, useSelector } from '@tarojs/redux'
@@ -46,8 +46,9 @@ export default function Publish() {
     }
     if (!content) {
       Taro.atMessage({
-        message: '您还有内容没有填写完哦',
+        message: '您的内容还没有填写哦',
         type: 'warning',
+        duration: 900,
       })
       return
     }
@@ -61,13 +62,16 @@ export default function Publish() {
       },
     })
     setContent('')
+  }
+
+  useEffect(() => {
     if (postStatus === POST_SUCCESS) {
       // 发布成功，跳转首页
       setTimeout(() => {
         Taro.switchTab({ url: '/pages/index/index' })
       }, 1000);
     }
-  }
+  }, [postStatus])
 
   return (
     <ClLayout margin='small'>
