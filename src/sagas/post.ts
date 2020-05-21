@@ -17,7 +17,6 @@ import {
 function* createPost(postData, userId) {
 	try {
 		const post = yield call(postApi.createPost, postData, userId);
-		console.log('%cAT-post: ', 'color: #bf2c9f; background: pink; font-size: 13px;', post);
 
 		// 其实以下三步可以合成一步，但是这里为了讲解清晰，将它们拆分成独立的单元
 
