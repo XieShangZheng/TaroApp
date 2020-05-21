@@ -3,7 +3,7 @@ import { View } from '@tarojs/components'
 import { ClMenuList } from 'mp-colorui'
 import './index.scss'
 
-export default function List() {
+export default function UserList() {
   const typeMenu = [
     { title: '用户列表', arrow: true },
   ]

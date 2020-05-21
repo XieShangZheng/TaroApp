@@ -2,7 +2,7 @@ import Taro, { useEffect } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { useDispatch, useSelector } from '@tarojs/redux'
 import { AtMessage } from 'taro-ui'
-import { Header, Footer, List } from '../../components'
+import { Header, Footer, UserList } from '../../components'
 import './mine.scss'
 import { SET_LOGIN_INFO, LOGIN_SUCCESS } from '../../constants'
 
@@ -48,7 +48,7 @@ export default function Mine() {
       <AtMessage />
       <Header />
       {
-        isLogged && roles.includes('1') && <List />
+        isLogged && roles.includes('1') && <UserList />
       }
       <View className='footerWrap'>
         <Footer />
