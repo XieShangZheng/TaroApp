@@ -25,7 +25,7 @@
     "paths": {
       "@/components/*": ["./src/components"],
       "@/constants/*": ["./src/constants"],
-      "@/actions/*": ["./src/actions"]
+      "@/actions/*": ["./src/actions"],
     }
   },
   "exclude": [
