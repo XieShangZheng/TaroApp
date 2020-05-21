@@ -2,9 +2,10 @@ import Taro, { useEffect } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { useDispatch, useSelector } from '@tarojs/redux'
 import { AtMessage } from 'taro-ui'
-import { Header, Footer, UserList } from '../../components'
+import { Header, Footer, MineList } from '@/components/'
+import { SET_LOGIN_INFO, LOGIN_SUCCESS } from '@/constants/'
+
 import './mine.scss'
-import { SET_LOGIN_INFO, LOGIN_SUCCESS } from '../../constants'
 
 interface User {
   user: {
@@ -16,7 +17,6 @@ interface User {
 export default function Mine() {
   const dispatch = useDispatch()
   const loginStatus = useSelector((state: User) => state.user.loginStatus)
-  const roles = useSelector((state: User) => state.user.roles)
   const isLogged = loginStatus === 'LOGIN_SUCCESS';
 
   useEffect(() => {
@@ -47,9 +47,7 @@ export default function Mine() {
     <View className='mine'>
       <AtMessage />
       <Header />
-      {
-        isLogged && roles.includes('1') && <UserList />
-      }
+      <MineList />
       <View className='footerWrap'>
         <Footer />
       </View>
