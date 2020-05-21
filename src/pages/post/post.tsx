@@ -2,8 +2,8 @@ import Taro, { useRouter, useEffect } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { useSelector, useDispatch } from '@tarojs/redux';
 
-import { PostCard, } from '../../components'
-import { GET_POST, SET_POST } from '../../constants'
+import { PostCard, } from '@/components/'
+import { GET_POST, SET_POST } from '@/constants/'
 import './post.scss'
 
 type State = {

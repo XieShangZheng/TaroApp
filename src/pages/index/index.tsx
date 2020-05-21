@@ -2,7 +2,7 @@ import Taro, { useEffect } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import { useSelector, useDispatch } from '@tarojs/redux'
 import { AtFab, AtMessage } from 'taro-ui'
-import PostCard from '@/components/PostCard'
+import { PostCard } from '@/components/'
 
 import {
   SET_LOGIN_INFO,
