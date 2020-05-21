@@ -33,7 +33,7 @@ function* login(userInfo) {
 		// 更新 Redux store 数据
 		yield put({
 			type: SET_LOGIN_INFO,
-			payload: { ...user },
+			payload: { ...user, userId: user._id },
 		});
 
 		// 提示登录成功
